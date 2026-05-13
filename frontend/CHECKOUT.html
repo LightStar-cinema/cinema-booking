@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-tertiary": "#1d00a5",
+                  "on-primary-container": "#ede0ff",
+                  "inverse-primary": "#732ee4",
+                  "on-secondary-fixed-variant": "#5b00c5",
+                  "primary-fixed-dim": "#d2bbff",
+                  "surface": "#15121b",
+                  "surface-container-high": "#2c2833",
+                  "inverse-surface": "#e8dfee",
+                  "on-secondary-fixed": "#250059",
+                  "on-error-container": "#ffdad6",
+                  "on-secondary": "#3f008d",
+                  "on-primary-fixed-variant": "#5a00c6",
+                  "on-secondary-container": "#c7aaff",
+                  "on-tertiary-fixed": "#0f0069",
+                  "surface-tint": "#d2bbff",
+                  "surface-dim": "#15121b",
+                  "outline": "#958da1",
+                  "surface-container-lowest": "#100d16",
+                  "on-tertiary-container": "#e6e3ff",
+                  "surface-variant": "#37333e",
+                  "tertiary-fixed-dim": "#c3c0ff",
+                  "on-surface": "#e8dfee",
+                  "error": "#ffb4ab",
+                  "surface-container-low": "#1d1a24",
+                  "tertiary-fixed": "#e2dfff",
+                  "secondary-fixed-dim": "#d3bbff",
+                  "secondary": "#d3bbff",
+                  "on-surface-variant": "#ccc3d8",
+                  "error-container": "#93000a",
+                  "primary-container": "#7c3aed",
+                  "surface-bright": "#3c3742",
+                  "on-primary": "#3f008e",
+                  "inverse-on-surface": "#332f39",
+                  "surface-container-highest": "#37333e",
+                  "tertiary": "#c3c0ff",
+                  "background": "#15121b",
+                  "secondary-fixed": "#ebddff",
+                  "outline-variant": "#4a4455",
+                  "on-primary-fixed": "#25005a",
+                  "on-tertiary-fixed-variant": "#3323cc",
+                  "secondary-container": "#5d03ca",
+                  "on-error": "#690005",
+                  "primary-fixed": "#eaddff",
+                  "on-background": "#e8dfee",
+                  "surface-container": "#221e28",
+                  "tertiary-container": "#564eec",
+                  "primary": "#d2bbff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "lg": "24px",
+                  "unit": "4px",
+                  "sm": "8px",
+                  "gutter": "24px",
+                  "xxl": "80px",
+                  "container-padding": "32px",
+                  "md": "16px",
+                  "xl": "48px",
+                  "xs": "4px"
+          },
+          "fontFamily": {
+                  "body-lg": ["Inter"],
+                  "label-ui": ["Space Grotesk"],
+                  "h1-cinematic": ["Inter"],
+                  "display-xl": ["Inter"],
+                  "body-md": ["Inter"],
+                  "label-caps": ["Space Grotesk"],
+                  "h2-cinematic": ["Inter"],
+                  "h3-cinematic": ["Inter"]
+          },
+          "fontSize": {
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "label-ui": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                  "h1-cinematic": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "display-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                  "h2-cinematic": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "h3-cinematic": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-panel {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glow-primary {
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+    }
+    .glow-text {
+      text-shadow: 0 0 10px rgba(210, 187, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-primary-container selection:text-white">
+<!-- Top Navigation (Shared Component) -->
+<nav class="fixed top-0 w-full border-b border-white/10 bg-slate-950/70 backdrop-blur-xl z-50">
+<div class="flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black tracking-tighter bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">CINE LUXE</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 font-medium hover:text-white transition-colors" href="#">Movies</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors" href="#">Cinemas</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors" href="#">Offers</a>
+<a class="text-white border-b-2 border-indigo-500 pb-1" href="#">My Bookings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-all cursor-pointer">notifications</button>
+<div class="w-10 h-10 rounded-full border border-white/20 overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A high-quality studio portrait of a professional individual with soft, cinematic rim lighting against a dark, moody background. The person has a friendly expression, representing a premium user profile. The aesthetic is clean and modern, with a focus on high-end digital photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ0wIireGx1PjSBJSI8Q_vEUlIHDdfLeHPQ6JTV_rT8vM8xbwzE8fx8xtL5vh4USQqz8_r0R7FMXqa2mF5ENPZ8gZnUe3q2wyV8rM6DLG-currlpVBLYOqihHq3ubjwfCGMEyJf4eGv0NgvO3IHCpeQhQ8aT61P1tTmrMtXRB3lmCNSdlJhmTN8xLJs-1EPYXvSHi0TEY-f8Mu9gMgv7QThMz4WPPPoISZJAuflGa2MtxRYiXrTWTMyLvWE1GlvhYuj6qTgwZ40qU"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-container-padding max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Payment Section -->
+<section class="lg:col-span-7 space-y-lg">
+<header class="mb-xl">
+<h1 class="font-h1-cinematic text-h1-cinematic text-on-surface glow-text">Secure Checkout</h1>
+<p class="text-on-surface-variant font-body-lg mt-sm">Complete your cinematic journey with our encrypted payment gateway.</p>
+</header>
+<!-- Card Preview -->
+<div class="relative w-full aspect-[1.586/1] md:w-[400px] h-[250px] mx-auto lg:mx-0 rounded-3xl p-lg overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-700 to-fuchsia-800 opacity-90"></div>
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+<div class="relative h-full flex flex-col justify-between z-10">
+<div class="flex justify-between items-start">
+<div class="material-symbols-outlined text-4xl text-white/80" style="font-variation-settings: 'FILL' 1;">credit_card</div>
+<div class="font-label-caps text-white/60">PREMIUM MEMBER</div>
+</div>
+<div class="space-y-md">
+<div class="font-label-ui text-xl md:text-2xl tracking-[0.2em] text-white glow-text">•••• •••• •••• 4242</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] font-label-caps text-white/50 uppercase">Card Holder</p>
+<p class="font-label-ui text-white">ALEXANDER RIVERA</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-label-caps text-white/50 uppercase">Expires</p>
+<p class="font-label-ui text-white">12/28</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Form -->
+<div class="glass-panel rounded-3xl p-xl shadow-2xl">
+<form class="space-y-lg">
+<div class="space-y-sm">
+<label class="font-label-caps text-on-surface-variant block">Cardholder Name</label>
+<input id="card-name" class="w-full bg-white/5 border border-white/10 rounded-xl px-md py-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-white/20 font-label-ui" placeholder="e.g. ALEXANDER RIVERA" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="font-label-caps text-on-surface-variant block">Card Number</label>
+<div class="relative">
+<input id="card-number" class="w-full bg-white/5 border border-white/10 rounded-xl px-md py-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-white/20 font-label-ui pl-12" placeholder="0000 0000 0000 0000" type="text" maxlength="19" inputmode="numeric"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/30">lock</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="space-y-sm">
+<label class="font-label-caps text-on-surface-variant block">Expiry Date</label>
+<input id="card-expiry" class="w-full bg-white/5 border border-white/10 rounded-xl px-md py-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-white/20 font-label-ui text-center" placeholder="MM / YY" type="text" maxlength="5"/>
+</div>
+<div class="space-y-sm">
+<label class="font-label-caps text-on-surface-variant block">CVV</label>
+<input id="card-cvv" class="w-full bg-white/5 border border-white/10 rounded-xl px-md py-4 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-white/20 font-label-ui text-center" placeholder="•••" type="password" maxlength="4"/>
+</div>
+</div>
+<div class="flex items-center gap-sm pt-md">
+<input class="rounded border-white/20 bg-white/5 text-primary focus:ring-primary w-5 h-5" id="save-card" type="checkbox"/>
+<label class="text-on-surface-variant text-label-ui" for="save-card">Save card for faster checkout in the future.</label>
+</div>
+</form>
+</div>
+</section>
+<!-- Sidebar Order Summary -->
+<aside class="lg:col-span-5">
+<div class="glass-panel rounded-3xl p-xl shadow-2xl sticky top-32 border-primary/20">
+<h2 class="font-h3-cinematic text-h3-cinematic text-on-surface mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+          Order Summary
+        </h2>
+<!-- Movie Info Card -->
+<div class="flex gap-md mb-xl p-md bg-white/5 rounded-2xl border border-white/5">
+<div class="w-24 h-36 flex-shrink-0 rounded-lg overflow-hidden shadow-lg shadow-black/50">
+<img alt="Movie poster" class="w-full h-full object-cover" data-alt="A moody and dramatic movie poster featuring a silhouette of a lone figure standing against a cosmic nebula background. The color palette is dominated by deep violets, indigos, and electric blues with sparkling stardust. The style is futuristic and cinematic, emphasizing scale and wonder with high-contrast lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx6HaGhsETcZptwwCZUjYjPyWOtwDVoLsYDPpzlehD8kcSnHlWywVu98ikYS4_tUdpVuNtjPPtnIeLQZnO3hryXrEwMVFTQyjSxTVeJpAJap3OlTkbUon5BXr_csRSShhclVXP1vuAZUMx2W_aCHjgHFRqt3vt65-shAqfl2ops2CFjm_wXriRbY_Uv_eC_zAEjA0mVmLR50gvgmJ1VX7uK1dCwr1ku5jrB5NzOzhGEB1iA5TpRoYDO9aF1bZJEBWXW5Jw6D3opqA"/>
+</div>
+<div class="flex flex-col justify-center">
+<h3 id="order-movie-title" class="font-h3-cinematic text-xl text-white">NEON PULSE: REVENANT</h3>
+<p id="order-screen" class="text-on-surface-variant text-label-ui mt-1">IMAX 3D • LUXE Hall 4</p>
+<div class="flex items-center gap-2 mt-2 text-primary font-bold">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span id="order-datetime" class="text-label-caps">OCT 24, 2024 • 20:45</span>
+</div>
+</div>
+</div>
+<!-- Details -->
+<div class="space-y-md border-b border-white/10 pb-xl mb-xl">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Selected Seats</span>
+<span id="order-seats" class="text-white font-label-ui font-bold">—</span>
+</div>
+<div class="flex justify-between items-center">
+<span id="order-ticket-label" class="text-on-surface-variant">Tickets</span>
+<span id="order-ticket-cost" class="text-white font-label-ui">$0.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Booking Fee</span>
+<span class="text-white font-label-ui">$4.50</span>
+</div>
+<div id="promo-discount-row" class="hidden flex justify-between items-center">
+<span class="text-green-400 font-label-caps" id="promo-discount-label">Promo Discount</span>
+<span id="promo-discount-amount" class="text-green-400 font-label-ui font-bold"></span>
+</div>
+<div class="pt-md">
+<div class="flex gap-2">
+<input id="promo-input" class="flex-grow bg-white/5 border border-white/10 rounded-xl px-md py-3 text-white focus:border-primary outline-none transition-all placeholder:text-white/20 font-label-caps text-xs" placeholder="PROMO CODE" type="text"/>
+<button id="promo-btn" type="button" class="bg-white/10 hover:bg-white/20 text-white font-label-caps px-6 py-3 rounded-xl transition-all border border-white/10">APPLY</button>
+</div>
+<div id="promo-msg" class="hidden mt-2 text-xs font-label-caps"></div>
+</div>
+</div>
+<!-- Total -->
+<div class="flex justify-between items-center mb-xl">
+<span class="text-xl font-h3-cinematic text-white">Total Amount</span>
+<div class="text-right">
+<span id="order-total" class="text-3xl font-display-xl text-primary glow-text">$0.00</span>
+<p class="text-[10px] text-on-surface-variant uppercase mt-1">Inclusive of all taxes</p>
+</div>
+</div>
+<!-- Action Button -->
+<button id="pay-btn" class="w-full py-5 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-h3-cinematic text-lg glow-primary hover:scale-[1.02] active:scale-[0.98] transition-all mb-lg flex items-center justify-center gap-3 shadow-xl shadow-indigo-500/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+          Complete Payment
+        </button>
+<!-- Trust Badges -->
+<div class="flex justify-center items-center gap-8 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-2xl">shield</span>
+<span class="text-[8px] font-label-caps">PCI-DSS</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-2xl">verified</span>
+<span class="text-[8px] font-label-caps">VERIFIED</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-2xl">lock</span>
+<span class="text-[8px] font-label-caps">SSL SECURE</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Success Confirmation Overlay (Hidden by Default/Mockup State) -->
+<div id="success-overlay" class="fixed inset-0 z-[100] flex items-center justify-center p-md pointer-events-none opacity-0 invisible">
+<div class="absolute inset-0 bg-slate-950/90 backdrop-blur-3xl"></div>
+<div class="relative glass-panel rounded-[40px] max-w-lg w-full p-xl border-primary shadow-[0_0_100px_rgba(124,58,237,0.3)] text-center">
+<div class="w-24 h-24 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-lg">
+<span class="material-symbols-outlined text-primary text-5xl">check_circle</span>
+</div>
+<h2 class="font-display-xl text-4xl mb-sm text-white">Booking Confirmed!</h2>
+<p class="text-on-surface-variant mb-xl">Your cinematic journey begins soon.</p>
+<p id="success-ref" class="text-primary font-bold text-lg mb-4"></p>
+<!-- QR Ticket Component -->
+<div class="bg-white p-lg rounded-3xl mx-auto max-w-[280px] mb-xl shadow-2xl rotate-1">
+<div class="aspect-square bg-[url('https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=CINE-LUXE-REVENANT-VIP-G12')] bg-cover mb-lg"></div>
+<div class="space-y-md text-slate-900">
+<div class="flex justify-between border-b border-slate-200 pb-sm">
+<div class="text-left">
+<p class="text-[10px] font-label-caps text-slate-400">THEATER</p>
+<p class="font-label-ui font-bold text-sm">LUXE HALL 4</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-label-caps text-slate-400">SEATS</p>
+<p class="font-label-ui font-bold text-sm">G12, G13, G14</p>
+</div>
+</div>
+<div class="text-left">
+<p class="text-[10px] font-label-caps text-slate-400">DATE &amp; TIME</p>
+<p class="font-label-ui font-bold text-sm">24 OCT • 20:45</p>
+</div>
+</div>
+<div class="mt-lg border-t-2 border-dashed border-slate-300 pt-md">
+<p class="text-[10px] font-label-caps text-slate-400">ORDER ID: CL-29481-X</p>
+</div>
+</div>
+<button class="w-full py-4 rounded-xl border border-white/10 hover:bg-white/5 text-white font-label-caps transition-all">
+        DOWNLOAD E-TICKET
+      </button>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 mt-auto border-t border-white/5 bg-slate-950">
+<div class="flex flex-col items-center justify-center gap-6 px-8 max-w-[1440px] mx-auto">
+<div class="text-xl font-black text-indigo-500">CINE LUXE</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-sans text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-sans text-xs uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-sans text-xs uppercase tracking-widest" href="#">Help Center</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-sans text-xs uppercase tracking-widest" href="#">Contact Us</a>
+</div>
+<p class="text-slate-600 font-sans text-xs uppercase tracking-widest">© 2024 CINE LUXE. BEYOND CINEMATIC BOUNDARIES.</p>
+</div>
+</footer>
+<script>
+const TOKEN_KEY = 'cinema_token';
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+async function apiFetch(method, path, body) {
+  const h = {};
+  const tok = getToken();
+  if (tok) h['Authorization'] = `Bearer ${tok}`;
+  if (body != null) h['Content-Type'] = 'application/json';
+  const init = { method, headers: h };
+  if (body != null) init.body = JSON.stringify(body);
+  const r = await fetch(path, init);
+  if (r.status === 204) return null;
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(d.detail || `HTTP ${r.status}`); e.status = r.status; e.retryAfter = r.headers.get('Retry-After'); throw e; }
+  return d;
+}
+function fmt(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString([], { day:'numeric', month:'short', year:'numeric' }) + ' · ' + d.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+}
+
+async function loadBookingSummary() {
+  if (!getToken()) { location.href = '/LANDING_PAGE.html'; return; }
+  const bookingId = sessionStorage.getItem('current_booking_id');
+  if (!bookingId) { location.href = '/LANDING_PAGE.html'; return; }
+
+  try {
+    const b = await apiFetch('GET', `/api/bookings/${bookingId}`);
+    document.getElementById('order-movie-title').textContent = b.showtime?.movie?.title?.toUpperCase() || '';
+    document.getElementById('order-screen').textContent = `${b.showtime?.screen?.name || ''} · ${b.showtime?.screen?.screen_type || ''}`;
+    document.getElementById('order-datetime').textContent = fmt(b.showtime?.start_time);
+    const seats = (b.seats || []).map(s => `${s.row}${s.number}`).join(', ');
+    document.getElementById('order-seats').textContent = seats || '—';
+    document.getElementById('order-ticket-label').textContent = `Tickets (${b.seats?.length || 0}x)`;
+    document.getElementById('order-ticket-cost').textContent = `$${parseFloat(b.total_amount).toFixed(2)}`;
+    document.getElementById('order-total').textContent = `$${parseFloat(b.total_amount).toFixed(2)}`;
+  } catch(e) {
+    console.error('summary load', e.message);
+  }
+}
+
+function validateCard() {
+  const name   = (document.getElementById('card-name')?.value   || '').trim();
+  const raw    = (document.getElementById('card-number')?.value  || '').replace(/[\s\-]/g, '');
+  const expiry = (document.getElementById('card-expiry')?.value  || '').trim();
+  const cvv    = (document.getElementById('card-cvv')?.value     || '').trim();
+  const errors = [];
+
+  if (!name)                              errors.push('Cardholder name is required.');
+  if (!/^\d{16}$/.test(raw))              errors.push('Card number must be exactly 16 digits.');
+  if (!/^\d{2}\/\d{2}$/.test(expiry))    errors.push('Expiry must be MM/YY format.');
+  else {
+    const [mm, yy] = expiry.split('/').map(Number);
+    const exp = new Date(2000 + yy, mm - 1, 1);
+    const now = new Date();
+    if (mm < 1 || mm > 12)               errors.push('Expiry month must be 01–12.');
+    else if (exp < new Date(now.getFullYear(), now.getMonth(), 1))
+                                          errors.push('Card has expired.');
+  }
+  if (!/^\d{3,4}$/.test(cvv))            errors.push('CVV must be 3 digits.');
+  return errors;
+}
+
+function showCardError(msg) {
+  let el = document.getElementById('card-validation-error');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'card-validation-error';
+    el.className = 'text-red-400 text-sm flex items-center gap-2 mb-2';
+    const btn = document.getElementById('pay-btn');
+    btn.parentNode.insertBefore(el, btn);
+  }
+  el.innerHTML = `<span class="material-symbols-outlined text-sm">error</span>${msg}`;
+  el.classList.remove('hidden');
+}
+
+function clearCardError() {
+  document.getElementById('card-validation-error')?.classList.add('hidden');
+}
+
+async function processPayment() {
+  clearCardError();
+  const errors = validateCard();
+  if (errors.length) { showCardError(errors[0]); return; }
+
+  const bookingId = sessionStorage.getItem('current_booking_id');
+  if (!bookingId) return;
+  const btn = document.getElementById('pay-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Processing…';
+  try {
+    await apiFetch('POST', '/api/payments', { booking_id: bookingId, payment_method: 'CARD' });
+    const booking = await apiFetch('GET', `/api/bookings/${bookingId}`);
+    showSuccess(booking.booking_reference, booking);
+    sessionStorage.removeItem('current_booking_id');
+  } catch(e) {
+    const msg = e.status === 429 ? `Rate limited. Retry in ${e.retryAfter}s.` : e.message;
+    showCardError(`Payment failed: ${msg}`);
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined">verified_user</span> Complete Payment';
+  }
+}
+
+function showSuccess(ref, booking) {
+  const overlay = document.getElementById('success-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+  overlay.classList.add('opacity-100', 'pointer-events-auto');
+
+  const refEl = document.getElementById('success-ref');
+  if (refEl) refEl.textContent = `Booking Reference: ${ref}`;
+
+  // Update QR placeholder with booking ref
+  const qrImg = overlay.querySelector('.bg-cover');
+  if (qrImg) qrImg.style.backgroundImage = `url('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=CINELUXE-${ref}')`;
+
+  // Update ticket details
+  const hall = overlay.querySelectorAll('.font-label-ui.font-bold.text-sm')[0];
+  const seatsEl = overlay.querySelectorAll('.font-label-ui.font-bold.text-sm')[1];
+  const dtEl = overlay.querySelectorAll('.font-label-ui.font-bold.text-sm')[2];
+  if (hall && booking) hall.textContent = booking.showtime?.screen?.name || '—';
+  if (seatsEl && booking) seatsEl.textContent = (booking.seats || []).map(s => `${s.row}${s.number}`).join(', ');
+  if (dtEl && booking) dtEl.textContent = new Date(booking.showtime?.start_time).toLocaleString([], { dateStyle:'short', timeStyle:'short' });
+
+  // Download button → go to my bookings
+  overlay.querySelector('button')?.addEventListener('click', () => { location.href = '/MY_BOOKINGS.html'; });
+}
+
+async function checkAdminNav() {
+  if (!getToken()) return;
+  try {
+    const u = await apiFetch('GET', '/api/auth/me');
+    if (!u?.is_admin) return;
+    const navLinks = document.querySelector('nav .hidden.md\\:flex');
+    if (navLinks && !navLinks.querySelector('[href="/ADMIN.html"]')) {
+      const a = document.createElement('a');
+      a.href = '/ADMIN.html';
+      a.className = 'text-indigo-400 font-bold hover:text-indigo-300 transition-colors';
+      a.textContent = 'Admin';
+      navLinks.appendChild(a);
+    }
+  } catch(e) {}
+}
+
+async function applyPromo() {
+  const input     = document.getElementById('promo-input');
+  const msg       = document.getElementById('promo-msg');
+  const btn       = document.getElementById('promo-btn');
+  const promoCode = (input?.value || '').trim().toUpperCase();
+  if (!promoCode) return;
+
+  const currentBookingId = sessionStorage.getItem('current_booking_id');
+  if (!currentBookingId) {
+    msg.textContent = 'No active booking found.';
+    msg.className = 'mt-2 text-xs font-label-caps text-red-400';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '…';
+  msg.className = 'hidden mt-2 text-xs font-label-caps';
+
+  try {
+    const token = getToken();
+    const r = await fetch('/api/bookings/apply-promo', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ code: promoCode, booking_id: currentBookingId }),
+    });
+
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.detail || `HTTP ${r.status}`);
+
+    document.getElementById('order-total').textContent = `$${parseFloat(data.total_amount).toFixed(2)}`;
+
+    const discountRow = document.getElementById('promo-discount-row');
+    document.getElementById('promo-discount-label').textContent = `${data.promo_code} Applied`;
+    document.getElementById('promo-discount-amount').textContent = `-$${parseFloat(data.discount_applied).toFixed(2)}`;
+    discountRow.classList.remove('hidden');
+
+    msg.textContent = 'Promo code applied!';
+    msg.className = 'mt-2 text-xs font-label-caps text-green-400';
+
+    input.disabled = true;
+    btn.textContent = 'APPLIED';
+    btn.disabled = true;
+    btn.classList.add('opacity-50', 'cursor-not-allowed');
+  } catch(e) {
+    console.error('applyPromo error:', e);
+    msg.textContent = e.message || 'Invalid promo code';
+    msg.className = 'mt-2 text-xs font-label-caps text-red-400';
+    btn.disabled = false;
+    btn.textContent = 'APPLY';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadBookingSummary();
+  checkAdminNav();
+  document.getElementById('pay-btn')?.addEventListener('click', processPayment);
+  document.getElementById('promo-btn')?.addEventListener('click', applyPromo);
+  document.getElementById('promo-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') applyPromo(); });
+  document.querySelectorAll('a').forEach(a => {
+    const t = a.textContent.trim();
+    if (t === 'My Bookings') a.href = '/MY_BOOKINGS.html';
+    if (t === 'Cinemas')     a.href = '/CINEMAS.html';
+    if (t === 'Offers')      a.href = '/OFFERS.html';
+    if (t === 'Movies')      a.href = '/LANDING_PAGE.html';
+  });
+});
+</script>
+</body></html>

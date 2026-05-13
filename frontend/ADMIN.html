@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cine Luxe | Admin Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: {
+      "background": "#15121b", "on-background": "#e8dfee",
+      "surface": "#15121b", "on-surface": "#e8dfee", "on-surface-variant": "#ccc3d8",
+      "primary": "#d2bbff", "primary-container": "#7c3aed", "on-primary": "#3f008e",
+      "outline": "#958da1", "outline-variant": "#4a4455",
+      "surface-container": "#221e28", "surface-container-high": "#2c2833",
+      "error": "#ffb4ab",
+    },
+    fontFamily: {
+      "body-md": ["Inter"], "label-ui": ["Space Grotesk"],
+      "h1-cinematic": ["Inter"], "h2-cinematic": ["Inter"],
+      "h3-cinematic": ["Inter"], "label-caps": ["Space Grotesk"],
+    },
+    fontSize: {
+      "label-ui":    ["14px", {"lineHeight":"20px","fontWeight":"500"}],
+      "label-caps":  ["12px", {"lineHeight":"16px","letterSpacing":"0.1em","fontWeight":"700"}],
+      "h1-cinematic":["48px", {"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],
+      "h2-cinematic":["32px", {"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],
+      "h3-cinematic":["24px", {"lineHeight":"32px","fontWeight":"600"}],
+    },
+  }}
+}
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass-panel { background: rgba(17,24,39,.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.1); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav class="fixed top-0 w-full border-b border-white/10 bg-slate-950/70 backdrop-blur-xl z-50 h-20 shadow-2xl shadow-indigo-500/10">
+  <div class="flex justify-between items-center px-8 h-full max-w-[1440px] mx-auto">
+    <div class="flex items-center gap-8">
+      <a href="/LANDING_PAGE.html" class="text-2xl font-black tracking-tighter bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">CINE LUXE</a>
+      <div class="hidden md:flex gap-6">
+        <a href="/LANDING_PAGE.html" class="text-slate-400 font-medium hover:text-white transition-colors text-sm">Movies</a>
+        <a href="/CINEMAS.html"      class="text-slate-400 font-medium hover:text-white transition-colors text-sm">Cinemas</a>
+        <a href="/OFFERS.html"       class="text-slate-400 font-medium hover:text-white transition-colors text-sm">Offers</a>
+        <a href="/MY_BOOKINGS.html"  class="text-slate-400 font-medium hover:text-white transition-colors text-sm">My Bookings</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4" id="nav-right">
+      <span class="text-slate-500 text-sm">Loading…</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Sidebar ──────────────────────────────────────────────────────────── -->
+<aside class="fixed left-4 top-24 bottom-4 w-56 rounded-3xl border border-white/10 bg-slate-900/80 backdrop-blur-2xl shadow-xl z-40 hidden lg:flex flex-col p-6 gap-2">
+  <div class="mb-6">
+    <h2 class="text-white font-bold text-lg font-h3-cinematic">Admin Panel</h2>
+    <p class="text-slate-500 text-xs font-label-ui mt-1">Cine Luxe Management</p>
+  </div>
+  <nav class="flex-1 flex flex-col gap-1">
+    <span class="flex items-center gap-3 bg-indigo-600/20 text-indigo-400 border-l-4 border-indigo-500 px-4 py-3 rounded-lg font-label-ui text-sm">
+      <span class="material-symbols-outlined text-sm">movie</span> Movies
+    </span>
+  </nav>
+</aside>
+
+<!-- ── Main ─────────────────────────────────────────────────────────────── -->
+<main class="lg:ml-[240px] mt-24 px-8 pb-12 max-w-[1440px]">
+
+  <!-- Header -->
+  <header class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-h1-cinematic text-white font-bold">Movie Management</h1>
+      <p class="text-slate-400 text-sm mt-1">Add, enable, or disable movies shown to customers.</p>
+    </div>
+    <button id="add-movie-btn"
+      class="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-label-ui font-bold text-sm transition-all hover:opacity-90 shrink-0"
+      style="background:linear-gradient(to right,#4f46e5,#7c3aed)">
+      <span class="material-symbols-outlined text-sm">add</span>
+      Add New Movie
+    </button>
+  </header>
+
+  <!-- Weekly Stats (last 7 days, visible to admins only) -->
+  <div id="weekly-stats" class="hidden mb-8">
+    <h2 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined text-indigo-400 text-base">bar_chart</span>
+      Last 7 Days
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+      <div class="glass-panel rounded-2xl p-5">
+        <p class="text-slate-400 text-xs font-label-caps uppercase tracking-wider mb-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-green-400 text-sm">payments</span> Revenue
+        </p>
+        <p id="stat-revenue" class="text-3xl font-bold text-white">—</p>
+      </div>
+      <div class="glass-panel rounded-2xl p-5">
+        <p class="text-slate-400 text-xs font-label-caps uppercase tracking-wider mb-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-indigo-400 text-sm">local_activity</span> Tickets Sold
+        </p>
+        <p id="stat-tickets" class="text-3xl font-bold text-white">—</p>
+      </div>
+      <div class="glass-panel rounded-2xl p-5">
+        <p class="text-slate-400 text-xs font-label-caps uppercase tracking-wider mb-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-purple-400 text-sm">star</span> Most Popular
+        </p>
+        <p id="stat-popular" class="text-lg font-bold text-indigo-300 truncate">—</p>
+      </div>
+    </div>
+    <!-- Per-movie breakdown -->
+    <div id="stat-breakdown" class="glass-panel rounded-2xl p-6 hidden">
+      <p class="text-slate-400 text-xs font-label-caps uppercase tracking-wider mb-4">Tickets by Movie</p>
+      <div id="stat-breakdown-rows" class="space-y-2"></div>
+    </div>
+  </div>
+
+  <!-- Non-admin warning (shown by JS if user is not admin) -->
+  <div id="non-admin-warning" class="hidden mb-6 px-6 py-3 bg-yellow-500/10 border border-yellow-500/30 rounded-xl text-yellow-400 text-sm flex items-center gap-2">
+    <span class="material-symbols-outlined text-sm">warning</span>
+    Read-only — admin privileges required to add or toggle movies.
+  </div>
+
+  <!-- Movie Table -->
+  <section class="glass-panel rounded-3xl overflow-hidden">
+    <!-- Table header row -->
+    <div class="px-8 py-5 border-b border-white/5 flex items-center justify-between gap-4">
+      <h2 class="font-h3-cinematic text-white text-xl">All Movies</h2>
+      <div class="relative">
+        <input id="movie-search" type="text" placeholder="Search by title or genre…"
+          class="bg-white/5 border border-white/10 rounded-xl px-4 py-2 pl-10 text-sm text-white focus:border-indigo-500 outline-none transition-all placeholder:text-slate-600 w-64"/>
+        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-500 text-sm">search</span>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left">
+        <thead class="bg-white/5">
+          <tr class="text-label-caps text-on-surface-variant text-xs">
+            <th class="px-8 py-4 font-bold">MOVIE</th>
+            <th class="px-8 py-4 font-bold">GENRE</th>
+            <th class="px-8 py-4 font-bold">RATING</th>
+            <th class="px-8 py-4 font-bold">RELEASE DATE</th>
+            <th class="px-8 py-4 font-bold">STATUS</th>
+            <th class="px-8 py-4 font-bold text-right">ACTION</th>
+          </tr>
+        </thead>
+        <tbody id="admin-movies-body" class="divide-y divide-white/5">
+          <tr><td colspan="6" class="px-8 py-10 text-slate-500 text-center text-sm">Loading movies…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ───────────────────────────────────────────────────────────── -->
+<footer class="w-full py-10 mt-auto border-t border-slate-800 bg-slate-950 flex flex-col items-center justify-center gap-4 px-8 lg:ml-[240px]">
+  <span class="text-lg font-black text-indigo-500">CINE LUXE</span>
+  <p class="text-slate-600 text-xs uppercase tracking-widest">© 2024 CINE LUXE. BEYOND CINEMATIC BOUNDARIES.</p>
+</footer>
+
+<!-- ── Add Movie Modal ───────────────────────────────────────────────────── -->
+<div id="add-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 hidden">
+  <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-xl" id="modal-backdrop"></div>
+  <div class="relative glass-panel rounded-3xl w-full max-w-xl p-8 shadow-2xl shadow-indigo-500/20 max-h-[90vh] overflow-y-auto">
+
+    <button id="modal-close" class="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <h2 class="font-h2-cinematic text-white text-2xl mb-1">Add New Movie</h2>
+    <p class="text-slate-400 text-sm mb-6">Fill in the details below. Title, genre, rating, duration and release date are required.</p>
+
+    <form id="add-movie-form" class="space-y-5">
+
+      <!-- Title -->
+      <div>
+        <label class="text-xs font-label-caps text-slate-400 block mb-1">TITLE *</label>
+        <input id="f-title" type="text" placeholder="e.g. Dune: Part Three" required
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all placeholder:text-slate-600 text-sm"/>
+      </div>
+
+      <!-- Genre + Rating row -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-label-caps text-slate-400 block mb-1">GENRE *</label>
+          <input id="f-genre" type="text" placeholder="e.g. Sci-Fi" required
+            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all placeholder:text-slate-600 text-sm"/>
+        </div>
+        <div>
+          <label class="text-xs font-label-caps text-slate-400 block mb-1">RATING *</label>
+          <select id="f-rating" required
+            class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all text-sm">
+            <option value="PG-13">PG-13</option>
+            <option value="PG">PG</option>
+            <option value="G">G</option>
+            <option value="R">R</option>
+            <option value="NC-17">NC-17</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Duration + Release Date row -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-label-caps text-slate-400 block mb-1">DURATION (MINUTES) *</label>
+          <input id="f-duration" type="number" min="30" max="360" placeholder="e.g. 148" required
+            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all placeholder:text-slate-600 text-sm"/>
+        </div>
+        <div>
+          <label class="text-xs font-label-caps text-slate-400 block mb-1">RELEASE DATE *</label>
+          <input id="f-date" type="date" required
+            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all text-sm [color-scheme:dark]"/>
+        </div>
+      </div>
+
+      <!-- Language -->
+      <div>
+        <label class="text-xs font-label-caps text-slate-400 block mb-1">LANGUAGE</label>
+        <input id="f-language" type="text" value="English"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all text-sm"/>
+      </div>
+
+      <!-- Poster URL -->
+      <div>
+        <label class="text-xs font-label-caps text-slate-400 block mb-1">POSTER URL <span class="normal-case font-normal">(optional)</span></label>
+        <input id="f-poster" type="url" placeholder="https://image.tmdb.org/t/p/w500/…"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all placeholder:text-slate-600 text-sm"/>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="text-xs font-label-caps text-slate-400 block mb-1">DESCRIPTION <span class="normal-case font-normal">(optional)</span></label>
+        <textarea id="f-desc" rows="3" placeholder="Brief synopsis…"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 outline-none transition-all placeholder:text-slate-600 text-sm resize-none"></textarea>
+      </div>
+
+      <!-- Error -->
+      <div id="form-error" class="hidden text-red-400 text-sm flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">error</span>
+        <span id="form-error-msg"></span>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" id="form-submit"
+        class="w-full py-3 rounded-xl text-white font-label-ui font-bold text-sm transition-all hover:opacity-90"
+        style="background:linear-gradient(to right,#4f46e5,#7c3aed)">
+        Create Movie
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<!-- ── Script ────────────────────────────────────────────────────────────── -->
+<script>
+const TOKEN_KEY = 'cinema_token';
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+const clearToken = () => localStorage.removeItem(TOKEN_KEY);
+
+async function apiFetch(method, path, body) {
+  const h = {};
+  const tok = getToken();
+  if (tok) h['Authorization'] = `Bearer ${tok}`;
+  if (body != null) h['Content-Type'] = 'application/json';
+  const r = await fetch(path, { method, headers: h, body: body != null ? JSON.stringify(body) : undefined });
+  if (r.status === 204) return null;
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(d.detail || `HTTP ${r.status}`); e.status = r.status; throw e; }
+  return d;
+}
+
+// ── Movie table ──────────────────────────────────────────────────────────────
+
+function statusBadge(active) {
+  return active
+    ? `<span class="px-2 py-0.5 rounded-lg border text-[10px] font-bold bg-green-500/20 text-green-400 border-green-500/30">ACTIVE</span>`
+    : `<span class="px-2 py-0.5 rounded-lg border text-[10px] font-bold bg-red-500/20 text-red-400 border-red-500/30">INACTIVE</span>`;
+}
+
+function movieRow(m) {
+  const tr = document.createElement('tr');
+  tr.className = 'hover:bg-white/[0.02] transition-colors';
+  tr.dataset.id = m.id;
+  tr.innerHTML = `
+    <td class="px-8 py-4">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-14 rounded-lg overflow-hidden bg-slate-800 border border-white/10 flex-shrink-0 flex items-center justify-center">
+          ${m.poster_url
+            ? `<img src="${m.poster_url}" alt="${m.title}" class="w-full h-full object-cover"/>`
+            : `<span class="material-symbols-outlined text-slate-600 text-sm">movie</span>`}
+        </div>
+        <div>
+          <p class="text-white font-bold text-sm truncate max-w-[200px]">${m.title}</p>
+          <p class="text-slate-500 text-xs">${m.duration_minutes}m</p>
+        </div>
+      </div>
+    </td>
+    <td class="px-8 py-4 text-slate-300 text-sm">${m.genre}</td>
+    <td class="px-8 py-4 text-slate-300 text-sm">${m.rating}</td>
+    <td class="px-8 py-4 text-slate-400 text-sm">${m.release_date}</td>
+    <td class="px-8 py-4">${statusBadge(m.is_active)}</td>
+    <td class="px-8 py-4 text-right">
+      <button
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-label-ui transition-all
+          ${m.is_active
+            ? 'border-red-500/30 text-red-400 hover:bg-red-500/10'
+            : 'border-green-500/30 text-green-400 hover:bg-green-500/10'}"
+        onclick="toggleMovie('${m.id}', ${m.is_active})">
+        <span class="material-symbols-outlined text-xs">${m.is_active ? 'visibility_off' : 'visibility'}</span>
+        ${m.is_active ? 'Deactivate' : 'Activate'}
+      </button>
+    </td>`;
+  return tr;
+}
+
+async function toggleMovie(id, currentlyActive) {
+  try {
+    await apiFetch('PATCH', `/api/movies/${id}`, { is_active: !currentlyActive });
+    loadMovies();
+  } catch(e) {
+    alert(`Could not update movie: ${e.message}`);
+  }
+}
+window.toggleMovie = toggleMovie;
+
+let allMovies = [];
+
+async function loadMovies(filter) {
+  const body = document.getElementById('admin-movies-body');
+  if (!filter) {
+    body.innerHTML = `<tr><td colspan="6" class="px-8 py-10 text-slate-500 text-center text-sm">Loading…</td></tr>`;
+    try {
+      allMovies = await apiFetch('GET', '/api/movies?active_only=false&limit=100');
+    } catch(e) {
+      body.innerHTML = `<tr><td colspan="6" class="px-8 py-10 text-red-400 text-center text-sm">${e.message}</td></tr>`;
+      return;
+    }
+  }
+  const list = filter
+    ? allMovies.filter(m => m.title.toLowerCase().includes(filter) || m.genre.toLowerCase().includes(filter))
+    : allMovies;
+  body.innerHTML = '';
+  if (!list.length) {
+    body.innerHTML = `<tr><td colspan="6" class="px-8 py-10 text-slate-500 text-center text-sm">No movies found.</td></tr>`;
+    return;
+  }
+  list.forEach(m => body.appendChild(movieRow(m)));
+}
+
+// ── Add Movie Modal ──────────────────────────────────────────────────────────
+
+function openModal() {
+  document.getElementById('add-modal').classList.remove('hidden');
+  document.getElementById('add-movie-form').reset();
+  document.getElementById('form-error').classList.add('hidden');
+  document.getElementById('form-submit').textContent = 'Create Movie';
+  document.getElementById('form-submit').disabled = false;
+}
+
+function closeModal() {
+  document.getElementById('add-modal').classList.add('hidden');
+}
+
+async function handleCreate(e) {
+  e.preventDefault();
+  const errEl   = document.getElementById('form-error');
+  const errMsg  = document.getElementById('form-error-msg');
+  const btn     = document.getElementById('form-submit');
+  errEl.classList.add('hidden');
+  btn.disabled = true;
+  btn.textContent = 'Creating…';
+
+  const poster  = document.getElementById('f-poster').value.trim();
+  const desc    = document.getElementById('f-desc').value.trim();
+
+  const payload = {
+    title:            document.getElementById('f-title').value.trim(),
+    genre:            document.getElementById('f-genre').value.trim(),
+    rating:           document.getElementById('f-rating').value,
+    duration_minutes: parseInt(document.getElementById('f-duration').value, 10),
+    release_date:     document.getElementById('f-date').value,
+    language:         document.getElementById('f-language').value.trim() || 'English',
+    ...(poster && { poster_url: poster }),
+    ...(desc   && { description: desc }),
+  };
+
+  try {
+    await apiFetch('POST', '/api/movies', payload);
+    closeModal();
+    await loadMovies();
+  } catch(e2) {
+    errMsg.textContent = e2.message;
+    errEl.classList.remove('hidden');
+    btn.disabled = false;
+    btn.textContent = 'Create Movie';
+  }
+}
+
+// ── Weekly stats ─────────────────────────────────────────────────────────────
+
+async function loadWeeklyStats() {
+  try {
+    const data = await apiFetch('GET', '/api/admin/stats/weekly');
+
+    document.getElementById('stat-revenue').textContent =
+      `$${data.total_revenue_usd.toFixed(2)}`;
+    document.getElementById('stat-tickets').textContent =
+      data.total_tickets.toLocaleString();
+    document.getElementById('stat-popular').textContent =
+      data.most_popular_movie || 'No data yet';
+
+    if (data.by_movie?.length) {
+      const bdo = document.getElementById('stat-breakdown');
+      const rows = document.getElementById('stat-breakdown-rows');
+      const max = data.by_movie[0].tickets || 1;
+      bdo.classList.remove('hidden');
+      rows.innerHTML = data.by_movie.map(m => `
+        <div class="flex items-center gap-3">
+          <span class="text-slate-300 text-sm w-40 truncate shrink-0">${m.title}</span>
+          <div class="flex-1 bg-white/5 rounded-full h-2 overflow-hidden">
+            <div class="h-full rounded-full bg-indigo-500" style="width:${Math.round(m.tickets/max*100)}%"></div>
+          </div>
+          <span class="text-slate-400 text-xs w-16 text-right shrink-0">${m.tickets} tkts</span>
+          <span class="text-slate-500 text-xs w-20 text-right shrink-0">$${m.revenue.toFixed(0)}</span>
+        </div>`).join('');
+    }
+  } catch(e) {
+    console.warn('Weekly stats load failed:', e.message);
+  }
+}
+
+// ── Nav auth state ────────────────────────────────────────────────────────────
+
+function updateNav(user) {
+  const el = document.getElementById('nav-right');
+  if (user) {
+    el.innerHTML = `
+      <span class="text-slate-300 text-sm">${user.full_name}</span>
+      <button id="nav-logout" class="text-xs text-slate-400 hover:text-red-400 transition-colors ml-2">Logout</button>`;
+    document.getElementById('nav-logout').addEventListener('click', () => { clearToken(); location.href = '/LANDING_PAGE.html'; });
+  } else {
+    el.innerHTML = `<a href="/LANDING_PAGE.html" class="px-5 py-2 rounded-xl text-white text-sm font-bold" style="background:linear-gradient(to right,#4f46e5,#7c3aed)">Login</a>`;
+  }
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', async () => {
+  if (!getToken()) { location.href = '/LANDING_PAGE.html'; return; }
+
+  // Auth check
+  let user = null;
+  try {
+    user = await apiFetch('GET', '/api/auth/me');
+  } catch(e) {
+    if (e.status === 401) { clearToken(); location.href = '/LANDING_PAGE.html'; return; }
+  }
+  updateNav(user);
+
+  if (!user?.is_admin) {
+    document.getElementById('non-admin-warning').classList.remove('hidden');
+    document.getElementById('add-movie-btn').disabled = true;
+    document.getElementById('add-movie-btn').classList.add('opacity-40', 'cursor-not-allowed');
+  } else {
+    document.getElementById('weekly-stats').classList.remove('hidden');
+    loadWeeklyStats();
+  }
+
+  loadMovies();
+
+  // Modal wiring
+  document.getElementById('add-movie-btn').addEventListener('click', openModal);
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+  document.getElementById('add-movie-form').addEventListener('submit', handleCreate);
+
+  // Search
+  let debounce;
+  document.getElementById('movie-search').addEventListener('input', e => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => loadMovies(e.target.value.trim().toLowerCase() || undefined), 250);
+  });
+});
+</script>
+</body>
+</html>

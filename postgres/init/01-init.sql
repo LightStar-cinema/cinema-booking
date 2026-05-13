@@ -1,0 +1,2 @@
+-- Placeholder: schema migrations will go here
+-- Applied automatically when the postgres container first starts

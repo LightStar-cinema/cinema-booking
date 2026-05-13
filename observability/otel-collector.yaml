@@ -1,0 +1,58 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 1000
+  # Promote resource attributes to Loki stream labels
+  resource:
+    attributes:
+      - action: insert
+        key: loki.resource.labels
+        value: service.name, service.version
+
+exporters:
+  # ── Traces → stdout (swap for otlp/tempo when Tempo is added) ─────────────
+  debug:
+    verbosity: normal
+
+  # ── Metrics → Prometheus scrape endpoint ──────────────────────────────────
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    resource_to_telemetry_conversion:
+      enabled: true     # promotes resource attributes to Prometheus labels
+
+  # ── Logs → Loki push API ──────────────────────────────────────────────────
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    default_labels_enabled:
+      exporter: false
+      job: true    # set from service.name resource attribute
+      level: true  # set from log severity
+
+service:
+  telemetry:
+    logs:
+      level: "warn"
+
+  pipelines:
+    traces:
+      receivers:  [otlp]
+      processors: [batch]
+      exporters:  [debug]
+
+    metrics:
+      receivers:  [otlp]
+      processors: [batch]
+      exporters:  [prometheus]
+
+    logs:
+      receivers:  [otlp]
+      processors: [resource, batch]
+      exporters:  [loki]

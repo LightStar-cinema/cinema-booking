@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#1d00a5",
+            "on-primary-container": "#ede0ff",
+            "inverse-primary": "#732ee4",
+            "on-secondary-fixed-variant": "#5b00c5",
+            "primary-fixed-dim": "#d2bbff",
+            "surface": "#15121b",
+            "surface-container-high": "#2c2833",
+            "inverse-surface": "#e8dfee",
+            "on-secondary-fixed": "#250059",
+            "on-error-container": "#ffdad6",
+            "on-secondary": "#3f008d",
+            "on-primary-fixed-variant": "#5a00c6",
+            "on-secondary-container": "#c7aaff",
+            "on-tertiary-fixed": "#0f0069",
+            "surface-tint": "#d2bbff",
+            "surface-dim": "#15121b",
+            "outline": "#958da1",
+            "surface-container-lowest": "#100d16",
+            "on-tertiary-container": "#e6e3ff",
+            "surface-variant": "#37333e",
+            "tertiary-fixed-dim": "#c3c0ff",
+            "on-surface": "#e8dfee",
+            "error": "#ffb4ab",
+            "surface-container-low": "#1d1a24",
+            "tertiary-fixed": "#e2dfff",
+            "secondary-fixed-dim": "#d3bbff",
+            "secondary": "#d3bbff",
+            "on-surface-variant": "#ccc3d8",
+            "error-container": "#93000a",
+            "primary-container": "#7c3aed",
+            "surface-bright": "#3c3742",
+            "on-primary": "#3f008e",
+            "inverse-on-surface": "#332f39",
+            "surface-container-highest": "#37333e",
+            "tertiary": "#c3c0ff",
+            "background": "#15121b",
+            "secondary-fixed": "#ebddff",
+            "outline-variant": "#4a4455",
+            "on-primary-fixed": "#25005a",
+            "on-tertiary-fixed-variant": "#3323cc",
+            "secondary-container": "#5d03ca",
+            "on-error": "#690005",
+            "primary-fixed": "#eaddff",
+            "on-background": "#e8dfee",
+            "surface-container": "#221e28",
+            "tertiary-container": "#564eec",
+            "primary": "#d2bbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "lg": "24px",
+            "unit": "4px",
+            "sm": "8px",
+            "gutter": "24px",
+            "xxl": "80px",
+            "container-padding": "32px",
+            "md": "16px",
+            "xl": "48px",
+            "xs": "4px"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "label-ui": ["Space Grotesk"],
+            "h1-cinematic": ["Inter"],
+            "display-xl": ["Inter"],
+            "body-md": ["Inter"],
+            "label-caps": ["Space Grotesk"],
+            "h2-cinematic": ["Inter"],
+            "h3-cinematic": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-ui": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+            "h1-cinematic": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "display-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+            "h2-cinematic": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "h3-cinematic": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-panel {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glow-primary {
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    }
+    .text-gradient {
+      background: linear-gradient(to right, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-indigo-500/10">
+<div class="flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black tracking-tighter bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">CINE LUXE</div>
+<div class="hidden md:flex items-center gap-8 font-sans tracking-tight">
+<a class="text-white border-b-2 border-indigo-500 pb-1 font-medium cursor-pointer active:scale-95 transition-all" href="#">Movies</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors cursor-pointer active:scale-95 transition-all" href="#">Cinemas</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors cursor-pointer active:scale-95 transition-all" href="#">Offers</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors cursor-pointer active:scale-95 transition-all" href="#">My Bookings</a>
+</div>
+<div class="flex items-center gap-6" id="nav-right">
+<button class="text-indigo-500 hover:bg-white/5 p-2 rounded-full transition-all duration-300 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full border border-indigo-500/30 overflow-hidden cursor-pointer active:scale-95 transition-all">
+<img alt="User profile avatar" data-alt="A professional studio portrait of a young man with a friendly expression, set against a dark, minimalist background. The lighting is dramatic and cinematic, featuring subtle purple rim lighting that aligns with a high-end futuristic digital aesthetic. The image is crisp, with high contrast and deep blacks that emphasize the premium, exclusive feel of the platform user interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfOVqF7cI6fMYYqVbj2ZFDucQuRkWVTJSykyQv5V04cWx7gV2JJ4ULY1rdd9z4pEi9nseemn891JURsmsmrZOCBB40eprBe3IrHx6FUdtGJthYzvxmLipab_w2R3eLWi8nAxlBvTIWJLZJzczQK9xuBC6hbfjAIHO_BGAEmYWzroFpIS-1s8P5eQkt0dIDilfv56lMEEhBZ5TcA2jTbHBkdNZzHJNec1-Dexp1BEJ-hasp8vOHXuO3jG93OP8SmlYRJLb4G3T_Yo4"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative h-[921px] min-h-[700px] flex items-end pb-32 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20 z-10"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover" alt="Avengers Doomsday" src="/images/hero.jpg"/>
+</div>
+<div class="relative z-20 px-8 lg:px-xl w-full max-w-[1440px] mx-auto">
+<div class="max-w-2xl space-y-md">
+<div class="flex items-center gap-sm">
+<span class="bg-primary-container text-on-primary-container px-sm py-1 rounded-lg font-label-caps text-label-caps uppercase tracking-widest">Featured Movie</span>
+<span class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> 9.2 Rating</span>
+</div>
+<h1 class="font-h1-cinematic text-display-xl tracking-tighter text-white">THE EDGE OF <span class="text-gradient">ETERNITY</span></h1>
+<p class="font-body-lg text-on-surface-variant max-w-xl">In a future where humanity has colonized the stars, one pilot must journey beyond the known universe to save the dying sun. An immersive cinematic experience that redefines the genre.</p>
+</div>
+</div>
+</header>
+<!-- Search & Filters -->
+<section class="px-8 -mt-24 relative z-30 max-w-[1440px] mx-auto">
+<div class="glass-panel p-gutter rounded-[32px] shadow-2xl flex flex-col md:flex-row items-center gap-gutter">
+<div class="flex-1 w-full relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-white/5 border border-white/10 rounded-2xl py-md pl-xl pr-md text-white focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all placeholder:text-slate-500 font-body-md" placeholder="Search for movies, actors, directors..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Now Showing Carousel -->
+<section class="py-xxl px-8 max-w-[1440px] mx-auto">
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h2 class="font-h2-cinematic text-white flex items-center gap-sm">
+<span class="w-2 h-8 bg-indigo-500 rounded-full"></span>
+          Now Showing
+        </h2>
+<p class="text-slate-400 mt-xs">Hottest blockbusters playing near you</p>
+</div>
+<button class="text-indigo-400 font-label-ui flex items-center gap-xs hover:gap-sm transition-all">
+        View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-gutter" id="movies-grid">
+<!-- Movie Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-3xl overflow-hidden mb-md border border-white/10 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="A moody movie poster for a neon-drenched crime thriller. The visual features a dark city street reflected in a puddle, with vibrant magenta and cyan streetlights blurring into an artistic bokeh. The atmosphere is gritty, sophisticated, and distinctly cinematic, with high contrast and deep shadows that reinforce the dark mode theme of the application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4m_j2DuoT4Y54EZ3tkroeAABVfMgPT9x7O9hBznipe1Rx2xUxn_hVX6Zv94OEGUIRmfRsiN3TQjg2S_DzQA-GFi5N47Vgx4VzULzJkbY7o_CrpvnW1g6u0aEX9jiHy6ga3L5wZhoFxc8_0BGjqzzC1OyDTHq5J7Vs9FvDs0WjgLAloDBcZIDDmB7KB_ZNrTzZqBbea8ElLICM92T4OYula10JfyxU71hkBQSkAPg4jtoWxKu8X8poPgsSnlnmtZ4fhl23yjHieKA"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-md backdrop-blur-sm p-md text-center">
+<button class="bg-white text-black font-label-ui px-lg py-sm rounded-lg hover:bg-indigo-400 hover:text-white transition-all w-full">Quick View</button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-label-ui px-lg py-sm rounded-lg hover:bg-white/30 transition-all w-full">Trailer</button>
+</div>
+<div class="absolute top-sm right-sm bg-indigo-600/80 backdrop-blur-md px-sm py-1 rounded-lg font-label-caps text-[10px] text-white">4K | IMAX</div>
+</div>
+<h3 class="font-h3-cinematic text-white text-lg truncate">Neon Metropolis</h3>
+<p class="text-slate-500 text-sm font-label-ui">Action, Sci-Fi • 2h 15m</p>
+</div>
+<!-- Movie Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-3xl overflow-hidden mb-md border border-white/10 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="A high-concept abstract cinematic poster featuring light trails in deep violet and electric blue. The image represents digital speed and futuristic technology, with clean lines and a sense of depth and motion. The color palette is strictly limited to dark backgrounds and vibrant neon highlights, aligning with the luxury vaporwave-inspired futurism of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCgX4lxtjx207paLNB7lCAupE2CE-Mtx2ngnHrp2llJWjv_va7UqAo7mYLLqxI8poB5VxTkyat2E8wuvhRiJ8yYW562TzaQ2eCml2QUhCtZjy_45eRSOKK7twAx151e4OMtOudso-vo_7rmyDRVfIpyQnxwzjtnSMMQliWQKyk_Ms3OvSt7pguyd4x7BJLWX9dekjNbJ5vttWYmmY1F1ws7A82Z53TgF2Y7qQMEKHR6uw2UDy7ny6kR5i2pQuzNljSdsgYvRWmKxI"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-md backdrop-blur-sm p-md text-center">
+<button class="bg-white text-black font-label-ui px-lg py-sm rounded-lg hover:bg-indigo-400 hover:text-white transition-all w-full">Quick View</button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-label-ui px-lg py-sm rounded-lg hover:bg-white/30 transition-all w-full">Trailer</button>
+</div>
+<div class="absolute top-sm right-sm bg-fuchsia-600/80 backdrop-blur-md px-sm py-1 rounded-lg font-label-caps text-[10px] text-white">DOLBY</div>
+</div>
+<h3 class="font-h3-cinematic text-white text-lg truncate">Quantum Shadow</h3>
+<p class="text-slate-500 text-sm font-label-ui">Thriller • 1h 50m</p>
+</div>
+<!-- Movie Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-3xl overflow-hidden mb-md border border-white/10 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="An ethereal, dreamlike cinematic visual of a single glowing flower standing in a dark, alien forest. The flower emits a soft indigo light that illuminates the surrounding misty terrain. The atmosphere is peaceful yet mysterious, showcasing a different, more serene side of the cinematic futuristic aesthetic with delicate textures and deep tonal range." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDID-d-RCE70oP27aUzx6pctCiquDqa8KoT7WFUH2F_j9nSKsk0VJtDm3gW8dAo5IuIg0EEyW1LG8cIzvekhparWqsQ9ZPMKGu4aa5w2ovanCW8nC19slwgvc88CjLBHi6QpEqEsTdmvy-z_ELdgxPP1lRk3mIUdqk5yLhi3M6EihKGKFv3LkPUbCkcF_1UivQyUvZhS8KRauL5qy63SxyjrINv_e5PN635RWeWzWH_mOJCHqL5zGGqTyyNUHM82CC3Je2JUZfyzuI"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-md backdrop-blur-sm p-md text-center">
+<button class="bg-white text-black font-label-ui px-lg py-sm rounded-lg hover:bg-indigo-400 hover:text-white transition-all w-full">Quick View</button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-label-ui px-lg py-sm rounded-lg hover:bg-white/30 transition-all w-full">Trailer</button>
+</div>
+</div>
+<h3 class="font-h3-cinematic text-white text-lg truncate">Silent Bloom</h3>
+<p class="text-slate-500 text-sm font-label-ui">Drama, Fantasy • 2h 05m</p>
+</div>
+<!-- Movie Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-3xl overflow-hidden mb-md border border-white/10 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="A vintage cinematic scene shot through a modern lens, featuring a classic silver car driving along a dark coastline under a moonlit sky. The image has a grainy, premium film look with deep blues and crisp whites. It evokes a sense of high-end, timeless cinema, bridging the gap between classic storytelling and futuristic digital luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATj7lpkIN8xohVja9EPdlVIftki5YUba4z65gfqEstf4jKakSBtOEQi-83Vst3wanA1W8IiibZYlpsUe7vZ0jXQhcdm8mrp-sjAXm9D4XwaFEq9AzCJv3SRQ35yyC7GMe7AqWYIgcWnnSel-VhuZdAOm9WAyUJ6VJK54u_BaeWsu2OuCaOzfXrNhpL1aypTQI3xRbAUvlrGyVN4RFJfTUZbQJanXQoay_NbSz7wonhH0JCmiUXnDEO-o3_bfIrMl6xqJeaslTWBBI"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-md backdrop-blur-sm p-md text-center">
+<button class="bg-white text-black font-label-ui px-lg py-sm rounded-lg hover:bg-indigo-400 hover:text-white transition-all w-full">Quick View</button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-label-ui px-lg py-sm rounded-lg hover:bg-white/30 transition-all w-full">Trailer</button>
+</div>
+</div>
+<h3 class="font-h3-cinematic text-white text-lg truncate">The Midnight Road</h3>
+<p class="text-slate-500 text-sm font-label-ui">Crime, Mystery • 2h 30m</p>
+</div>
+<!-- Movie Card 5 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-3xl overflow-hidden mb-md border border-white/10 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-full object-cover" data-alt="A close-up dramatic portrait of a lead actress looking into the distance with intensity. Her face is partially obscured by shadows, highlighted by a single strip of vibrant purple light. The focus is incredibly sharp on her eyes, creating a powerful emotional connection. The overall style is sophisticated and cinematic, emphasizing the star power and high-end nature of the movie platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN8KLsqh1Q9-pwxjRbOfhQo9TvKT-775EbQy22IZ7kPFcM0rCT2py5R474jHtgNOt9JSenT5aKeCY-CzOfw9Iyh0m9VpVV5UoQ10lPeJOtTVUah0_qvOlTqAlEsig_WJME7pZwtqwNrge1pa4kZCW69K07hsdR0vGXs4JHtnyvqhCWNeHB5T1CCl-P15K_ladejV8fzp2uPvfhd4fHXQ5Xfszlj756RX7ABg01YVGeHy_3zbTuHyeL5o6amVEMmf9AD8_RbIuZ-0s"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-md backdrop-blur-sm p-md text-center">
+<button class="bg-white text-black font-label-ui px-lg py-sm rounded-lg hover:bg-indigo-400 hover:text-white transition-all w-full">Quick View</button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-label-ui px-lg py-sm rounded-lg hover:bg-white/30 transition-all w-full">Trailer</button>
+</div>
+</div>
+<h3 class="font-h3-cinematic text-white text-lg truncate">Echoes of Gold</h3>
+<p class="text-slate-500 text-sm font-label-ui">Biography, History • 1h 45m</p>
+</div>
+</div>
+</section>
+<!-- CTA Membership Banner -->
+<section class="px-8 py-xl max-w-[1440px] mx-auto">
+<div class="relative rounded-[40px] overflow-hidden p-xl min-h-[350px] flex flex-col justify-center border border-indigo-500/20 shadow-2xl shadow-indigo-500/10">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="A low-angle, wide shot of an ultra-modern, luxury movie theater interior with plush purple velvet seats and neon accent lighting strips along the walls. The scene is empty and pristine, emphasizing a sense of exclusivity and high-end digital luxury. The lighting is dominated by deep indigo and vibrant fuchsia, creating a sophisticated and immersive atmosphere that reflects the premium membership experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn-r8NQZ8Mcr6Q7Psye465c_jxtftArcBci6Y83WVq3hdH3rmBmCnnb4r5qzt-pWK8stqcfG10w6dm0xURlwGUra9qeTxK3umGocFX4Wao4gfpHI7Ss1cRH-XyGrqWJ6seHFuScQNgO8IcjusexW-9oktDxSI7reu2RQGF5hRISO_ExeMhe1Qp8bNoz5i98AO-qpSwFDGDsZzzxOHgGCfC8W3r2PVCGNtU98NHZOkDSzWFBSSFVWCnNNC1Tdc7LwEs7mxq1eKylao"/>
+<div class="absolute inset-0 bg-gradient-to-r from-indigo-950 via-indigo-950/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-xl">
+<span class="text-indigo-400 font-label-caps text-label-caps tracking-widest uppercase mb-sm block">Luxury Experience</span>
+<h2 class="font-h1-cinematic text-white mb-md leading-tight">UPGRADE TO <span class="text-gradient">CINE PREMIER</span></h2>
+<p class="text-slate-300 font-body-md mb-xl">Enjoy unlimited popcorn, exclusive early access to blockbusters, and 20% off all ticket bookings. Redefine your movie-going experience with Cine Luxe Premier.</p>
+<div class="flex gap-md">
+<button class="bg-white text-indigo-950 font-bold px-xl py-md rounded-2xl hover:bg-indigo-400 hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]">Join Now</button>
+<button class="text-white border-b-2 border-white/20 pb-1 font-label-ui hover:border-indigo-500 transition-all">Learn more about benefits</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Coming Soon -->
+<section class="py-xxl px-8 max-w-[1440px] mx-auto">
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h2 class="font-h2-cinematic text-white flex items-center gap-sm">
+<span class="w-2 h-8 bg-fuchsia-500 rounded-full"></span>
+          Coming Soon
+        </h2>
+<p class="text-slate-400 mt-xs">Add these to your watchlist</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="coming-soon-grid">
+<!-- Populated by JavaScript from GET /api/movies?coming_soon=true -->
+<div class="glass-panel p-md rounded-3xl animate-pulse"><div class="flex gap-md"><div class="w-1/3 aspect-[2/3] rounded-2xl bg-slate-800 shrink-0"></div><div class="flex-1 space-y-3 py-sm"><div class="h-3 bg-slate-700 rounded w-1/2"></div><div class="h-5 bg-slate-700 rounded w-3/4"></div><div class="h-3 bg-slate-800 rounded w-full"></div></div></div></div>
+<div class="glass-panel p-md rounded-3xl animate-pulse"><div class="flex gap-md"><div class="w-1/3 aspect-[2/3] rounded-2xl bg-slate-800 shrink-0"></div><div class="flex-1 space-y-3 py-sm"><div class="h-3 bg-slate-700 rounded w-1/2"></div><div class="h-5 bg-slate-700 rounded w-3/4"></div><div class="h-3 bg-slate-800 rounded w-full"></div></div></div></div>
+<div class="glass-panel p-md rounded-3xl animate-pulse"><div class="flex gap-md"><div class="w-1/3 aspect-[2/3] rounded-2xl bg-slate-800 shrink-0"></div><div class="flex-1 space-y-3 py-sm"><div class="h-3 bg-slate-700 rounded w-1/2"></div><div class="h-5 bg-slate-700 rounded w-3/4"></div><div class="h-3 bg-slate-800 rounded w-full"></div></div></div></div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 mt-auto border-t border-slate-800">
+<div class="max-w-[1440px] mx-auto px-8 flex flex-col items-center justify-center gap-6">
+<div class="text-xl font-black text-indigo-500">CINE LUXE</div>
+<div class="flex flex-wrap justify-center gap-8 font-sans text-xs uppercase tracking-widest">
+<a class="text-slate-600 hover:text-indigo-400 transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors" href="#">Help Center</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex gap-md">
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-white hover:border-indigo-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-white hover:border-indigo-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined">alternate_email</span>
+</div>
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-500 hover:text-white hover:border-indigo-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined">share</span>
+</div>
+</div>
+<div class="text-slate-600 text-xs uppercase tracking-widest">© 2024 CINE LUXE. BEYOND CINEMATIC BOUNDARIES.</div>
+</div>
+</footer>
+<script>
+// ── Shared utilities ─────────────────────────────────────────────────────────
+const TOKEN_KEY = 'cinema_token';
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+const setToken = t => localStorage.setItem(TOKEN_KEY, t);
+const clearToken = () => localStorage.removeItem(TOKEN_KEY);
+
+async function apiFetch(method, path, body) {
+  const h = {};
+  const tok = getToken();
+  if (tok) h['Authorization'] = `Bearer ${tok}`;
+  if (body != null) h['Content-Type'] = 'application/json';
+  const init = { method, headers: h };
+  if (body != null) init.body = JSON.stringify(body);
+  const r = await fetch(path, init);
+  if (r.status === 204) return null;
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) {
+    const e = new Error(d.detail || `HTTP ${r.status}`);
+    e.status = r.status; e.retryAfter = r.headers.get('Retry-After'); throw e;
+  }
+  return d;
+}
+
+// ── Auth modal ───────────────────────────────────────────────────────────────
+function injectAuthModal() {
+  const m = document.createElement('div');
+  m.id = 'auth-modal';
+  m.className = 'fixed inset-0 z-[200] flex items-center justify-center p-4 hidden';
+  m.innerHTML = `
+    <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-xl" id="auth-backdrop"></div>
+    <div class="relative rounded-3xl w-full max-w-md p-8 border border-white/10 shadow-2xl shadow-indigo-500/20" style="background:rgba(17,24,39,.95)">
+      <button id="auth-close" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="text-2xl font-bold text-white mb-1" id="auth-title">Welcome Back</h2>
+      <p class="text-slate-400 text-sm mb-6" id="auth-sub">Sign in to your Cine Luxe account</p>
+      <div class="flex gap-2 mb-6 p-1 rounded-xl" style="background:rgba(255,255,255,.05)">
+        <button id="tab-login" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all bg-indigo-600 text-white">Login</button>
+        <button id="tab-reg" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white">Register</button>
+      </div>
+      <form id="login-form" class="space-y-4">
+        <input id="li-email" type="email" placeholder="Email" class="w-full rounded-xl px-4 py-3 text-white outline-none border border-white/10 placeholder:text-slate-600" style="background:rgba(255,255,255,.05)"/>
+        <input id="li-pass" type="password" placeholder="Password" class="w-full rounded-xl px-4 py-3 text-white outline-none border border-white/10 placeholder:text-slate-600" style="background:rgba(255,255,255,.05)"/>
+        <div id="li-err" class="text-red-400 text-sm hidden"></div>
+        <button type="submit" class="w-full py-3 rounded-xl text-white font-bold" style="background:linear-gradient(to right,#4f46e5,#7c3aed)">Sign In</button>
+      </form>
+      <form id="reg-form" class="space-y-4 hidden">
+        <input id="rg-name" type="text" placeholder="Full Name" class="w-full rounded-xl px-4 py-3 text-white outline-none border border-white/10 placeholder:text-slate-600" style="background:rgba(255,255,255,.05)"/>
+        <input id="rg-email" type="email" placeholder="Email" class="w-full rounded-xl px-4 py-3 text-white outline-none border border-white/10 placeholder:text-slate-600" style="background:rgba(255,255,255,.05)"/>
+        <input id="rg-pass" type="password" placeholder="Password" class="w-full rounded-xl px-4 py-3 text-white outline-none border border-white/10 placeholder:text-slate-600" style="background:rgba(255,255,255,.05)"/>
+        <p class="text-slate-500 text-xs -mt-1">Must be at least 8 characters with letters and numbers</p>
+        <div id="rg-err" class="text-red-400 text-sm hidden"></div>
+        <button type="submit" class="w-full py-3 rounded-xl text-white font-bold" style="background:linear-gradient(to right,#4f46e5,#7c3aed)">Create Account</button>
+      </form>
+    </div>`;
+  document.body.appendChild(m);
+
+  const openModal = () => m.classList.remove('hidden');
+  const closeModal = () => m.classList.add('hidden');
+  window.openAuthModal = openModal;
+
+  const switchTab = (tab) => {
+    const isLogin = tab === 'login';
+    document.getElementById('login-form').classList.toggle('hidden', !isLogin);
+    document.getElementById('reg-form').classList.toggle('hidden', isLogin);
+    document.getElementById('tab-login').className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${isLogin ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'}`;
+    document.getElementById('tab-reg').className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${!isLogin ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'}`;
+    document.getElementById('auth-title').textContent = isLogin ? 'Welcome Back' : 'Create Account';
+    document.getElementById('auth-sub').textContent = isLogin ? 'Sign in to your account' : 'Join Cine Luxe today';
+  };
+
+  document.getElementById('tab-login').addEventListener('click', () => switchTab('login'));
+  document.getElementById('tab-reg').addEventListener('click', () => switchTab('register'));
+  document.getElementById('auth-close').addEventListener('click', closeModal);
+  document.getElementById('auth-backdrop').addEventListener('click', closeModal);
+
+  document.getElementById('login-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = document.getElementById('li-err');
+    err.classList.add('hidden');
+    try {
+      const body = new URLSearchParams({ username: document.getElementById('li-email').value, password: document.getElementById('li-pass').value });
+      const r = await fetch('/api/auth/login', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body.toString() });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.detail || 'Login failed');
+      setToken(d.access_token);
+      closeModal();
+      updateNav();
+    } catch(e2) { err.textContent = e2.message; err.classList.remove('hidden'); }
+  });
+
+  document.getElementById('reg-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = document.getElementById('rg-err');
+    err.classList.add('hidden');
+    try {
+      const d = await apiFetch('POST', '/api/auth/register', { email: document.getElementById('rg-email').value, password: document.getElementById('rg-pass').value, full_name: document.getElementById('rg-name').value });
+      setToken(d.access_token);
+      closeModal();
+      updateNav();
+    } catch(e2) {
+      const msg = e2.status === 429 ? `Rate limited. Retry in ${e2.retryAfter}s.` : e2.message;
+      err.textContent = msg; err.classList.remove('hidden');
+    }
+  });
+}
+
+// ── Nav state ────────────────────────────────────────────────────────────────
+function updateNav() {
+  const el = document.getElementById('nav-right');
+  if (!el) return;
+  if (getToken()) {
+    el.innerHTML = `
+      <button class="text-indigo-500 hover:bg-white/5 p-2 rounded-full transition-all"><span class="material-symbols-outlined">notifications</span></button>
+      <a href="/MY_BOOKINGS.html" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">My Bookings</a>
+      <button id="nav-logout" class="text-sm text-slate-400 hover:text-red-400 transition-colors">Logout</button>`;
+    document.getElementById('nav-logout').addEventListener('click', () => { clearToken(); updateNav(); });
+    apiFetch('GET', '/api/auth/me').then(u => {
+      if (!u) return;
+      document.getElementById('nav-logout').textContent = `${u.full_name.split(' ')[0]} · Logout`;
+      if (u.is_admin) {
+        const adminLink = document.createElement('a');
+        adminLink.href = '/ADMIN.html';
+        adminLink.className = 'text-indigo-400 hover:text-indigo-300 text-sm font-bold transition-colors';
+        adminLink.textContent = 'Admin';
+        el.insertBefore(adminLink, document.getElementById('nav-logout'));
+      }
+    }).catch(() => {});
+  } else {
+    el.innerHTML = `<button id="nav-login-btn" class="px-6 py-2 rounded-xl text-white text-sm font-bold" style="background:linear-gradient(to right,#4f46e5,#7c3aed)">Login / Register</button>`;
+    document.getElementById('nav-login-btn').addEventListener('click', window.openAuthModal);
+  }
+}
+
+// ── Movie cards ──────────────────────────────────────────────────────────────
+function makeMovieCard(m) {
+  const d = document.createElement('div');
+  d.className = 'group cursor-pointer';
+  d.innerHTML = `
+    <div class="relative aspect-[2/3] rounded-3xl overflow-hidden mb-4 border border-white/10 transition-transform duration-500 group-hover:-translate-y-2 bg-slate-800 flex items-center justify-center">
+      ${m.poster_url ? `<img class="w-full h-full object-cover" src="${m.poster_url}" alt="${m.title}"/>` : `<span class="material-symbols-outlined text-5xl text-slate-600">movie</span>`}
+      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-4 backdrop-blur-sm p-4 text-center">
+        <button class="bg-white text-black text-sm font-bold px-6 py-2 rounded-lg hover:bg-indigo-400 hover:text-white transition-all w-full">Book Now</button>
+      </div>
+      <div class="absolute top-2 right-2 bg-indigo-600/80 backdrop-blur-md px-2 py-0.5 rounded-lg text-[10px] text-white font-bold">${m.rating || ''}</div>
+    </div>
+    <h3 class="text-white text-lg font-semibold truncate">${m.title}</h3>
+    <p class="text-slate-500 text-sm">${m.genre} · ${m.duration_minutes}m</p>`;
+  d.addEventListener('click', () => { location.href = `/MOVIE_DETAILS.html?movie_id=${m.id}`; });
+  return d;
+}
+
+async function loadMovies(query) {
+  const grid = document.getElementById('movies-grid');
+  if (!grid) return;
+  grid.innerHTML = `<div class="col-span-5 text-slate-500 text-center py-8">Loading…</div>`;
+  try {
+    const movies = await apiFetch('GET', '/api/movies?active_only=true&limit=20');
+    const list = query ? movies.filter(m => m.title.toLowerCase().includes(query.toLowerCase()) || m.genre.toLowerCase().includes(query.toLowerCase())) : movies;
+    grid.innerHTML = '';
+    if (!list.length) { grid.innerHTML = `<div class="col-span-5 text-slate-400 text-center py-8">No movies found.</div>`; return; }
+    list.forEach(m => grid.appendChild(makeMovieCard(m)));
+  } catch(e) {
+    grid.innerHTML = `<div class="col-span-5 text-red-400 text-center py-8">Could not load movies: ${e.message}</div>`;
+  }
+}
+
+// ── Coming Soon ───────────────────────────────────────────────────────────────
+function fmtReleaseMonth(dateStr) {
+  const [y, m] = dateStr.split('-').map(Number);
+  return new Date(y, m - 1, 1).toLocaleDateString([], { month: 'short', year: 'numeric' }).toUpperCase();
+}
+
+function makeComingSoonCard(m) {
+  const poster = m.poster_url
+    ? `<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${m.poster_url}" alt="${m.title}" loading="lazy"/>`
+    : `<div class="w-full h-full bg-slate-800 flex items-center justify-center"><span class="material-symbols-outlined text-4xl text-slate-600">movie</span></div>`;
+  return `
+    <div class="glass-panel p-md rounded-3xl group cursor-pointer hover:border-fuchsia-500/50 transition-all">
+      <div class="flex gap-md">
+        <div class="w-1/3 aspect-[2/3] rounded-2xl overflow-hidden shrink-0 bg-slate-800">${poster}</div>
+        <div class="flex flex-col justify-between py-sm">
+          <div>
+            <span class="text-fuchsia-400 text-label-caps font-label-caps mb-xs block">${fmtReleaseMonth(m.release_date)}</span>
+            <h3 class="text-white font-h3-cinematic text-xl mb-xs">${m.title}</h3>
+            <p class="text-slate-500 text-sm line-clamp-2">${m.description || ''}</p>
+          </div>
+          <button class="flex items-center gap-sm text-white font-label-ui hover:text-fuchsia-400 transition-colors mt-2">
+            <span class="material-symbols-outlined text-[20px]">add_circle</span> Remind Me
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function loadComingSoon() {
+  const grid = document.getElementById('coming-soon-grid');
+  if (!grid) return;
+  try {
+    const movies = await apiFetch('GET', '/api/movies?coming_soon=true&active_only=false&limit=6');
+    if (!movies?.length) return;
+    grid.innerHTML = movies.map(makeComingSoonCard).join('');
+  } catch(e) {
+    console.warn('Coming soon load failed:', e.message);
+  }
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  injectAuthModal();
+  updateNav();
+  loadMovies();
+  loadComingSoon();
+
+  const search = document.querySelector('input[placeholder*="Search"]');
+  if (search) {
+    let t;
+    search.addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => loadMovies(e.target.value.trim()), 350); });
+  }
+
+  document.querySelectorAll('a').forEach(a => {
+    const t = a.textContent.trim();
+    if (t === 'My Bookings') {
+      a.href = '/MY_BOOKINGS.html';
+      a.addEventListener('click', ev => { if (!getToken()) { ev.preventDefault(); window.openAuthModal?.(); } });
+    }
+    if (t === 'Cinemas') a.href = '/CINEMAS.html';
+    if (t === 'Offers')  a.href = '/OFFERS.html';
+    if (t === 'Movies')  a.href = '/LANDING_PAGE.html';
+  });
+});
+</script>
+</body></html>

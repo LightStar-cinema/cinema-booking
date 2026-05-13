@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cine Luxe | Offers & Membership</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: {
+      "surface": "#15121b", "background": "#15121b", "on-background": "#e8dfee",
+      "primary": "#d2bbff", "primary-container": "#7c3aed", "on-primary": "#3f008e",
+      "secondary": "#d3bbff", "secondary-container": "#5d03ca",
+      "on-surface": "#e8dfee", "on-surface-variant": "#ccc3d8",
+      "outline": "#958da1", "outline-variant": "#4a4455",
+      "surface-container": "#221e28", "surface-container-high": "#2c2833",
+    },
+    fontFamily: { "body-md": ["Inter"], "label-ui": ["Space Grotesk"], "h1-cinematic": ["Inter"], "h2-cinematic": ["Inter"], "h3-cinematic": ["Inter"], "label-caps": ["Space Grotesk"] },
+    fontSize: {
+      "label-ui": ["14px", {"lineHeight":"20px","fontWeight":"500"}],
+      "label-caps": ["12px", {"lineHeight":"16px","letterSpacing":"0.1em","fontWeight":"700"}],
+      "h1-cinematic": ["48px", {"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],
+      "h2-cinematic": ["32px", {"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],
+      "h3-cinematic": ["24px", {"lineHeight":"32px","fontWeight":"600"}],
+    },
+  }}
+}
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass-panel { background: rgba(17,24,39,.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.1); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+
+<!-- Nav -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-indigo-500/10">
+  <div class="flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto">
+    <a href="/LANDING_PAGE.html" class="text-2xl font-black tracking-tighter bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">CINE LUXE</a>
+    <div class="hidden md:flex gap-8 items-center">
+      <a href="/LANDING_PAGE.html" class="text-slate-400 font-medium hover:text-white transition-colors">Movies</a>
+      <a href="/CINEMAS.html" class="text-slate-400 font-medium hover:text-white transition-colors">Cinemas</a>
+      <a href="/OFFERS.html" class="text-white border-b-2 border-indigo-500 pb-1 font-medium">Offers</a>
+      <a href="/MY_BOOKINGS.html" class="text-slate-400 font-medium hover:text-white transition-colors">My Bookings</a>
+    </div>
+    <div class="flex items-center gap-4" id="nav-right">
+      <a href="/LANDING_PAGE.html" class="px-6 py-2 rounded-xl text-white text-sm font-bold" style="background:linear-gradient(to right,#4f46e5,#7c3aed)">Login / Register</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="pt-32 pb-16 px-8 max-w-[1440px] mx-auto w-full">
+  <div class="mb-12 text-center">
+    <span class="text-indigo-400 font-label-caps text-label-caps tracking-widest uppercase">Membership & Rewards</span>
+    <h1 class="font-h1-cinematic text-white mt-2">Exclusive <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Offers</span></h1>
+    <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-lg">Choose the plan that fits your cinema lifestyle. Every tier comes with real perks from day one.</p>
+  </div>
+
+  <!-- Current Promo Banner -->
+  <div class="relative rounded-3xl overflow-hidden p-8 mb-12 border border-indigo-500/20" style="background:linear-gradient(135deg,#1e1b4b,#2e1065)">
+    <div class="absolute -right-10 -top-10 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl"></div>
+    <div class="relative z-10 flex flex-col md:flex-row items-center gap-6 justify-between">
+      <div>
+        <span class="bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full">LIMITED TIME</span>
+        <h2 class="font-h2-cinematic text-white mt-3">Opening Week Special</h2>
+        <p class="text-slate-300 mt-2">Register now and get your first month of Gold membership free. No credit card required to start.</p>
+      </div>
+      <div class="shrink-0">
+        <a href="/LANDING_PAGE.html" class="block px-8 py-4 rounded-2xl text-white font-bold text-lg transition-all hover:scale-105" style="background:linear-gradient(to right,#4f46e5,#7c3aed)">Claim Offer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Membership Tiers -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+
+    <!-- Standard -->
+    <div class="glass-panel rounded-3xl p-8 flex flex-col hover:border-slate-600/60 transition-all">
+      <div class="w-12 h-12 rounded-xl bg-slate-700/50 flex items-center justify-center mb-6">
+        <span class="material-symbols-outlined text-slate-400">confirmation_number</span>
+      </div>
+      <h3 class="font-h3-cinematic text-white text-xl mb-1">Standard</h3>
+      <p class="text-slate-400 text-sm mb-6">Great for occasional moviegoers</p>
+      <div class="mb-6">
+        <span class="text-4xl font-black text-white">Free</span>
+        <span class="text-slate-400 text-sm ml-2">forever</span>
+      </div>
+      <ul class="space-y-3 mb-8 flex-1">
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Book any available seat</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Digital e-tickets</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Booking cancellation</li>
+        <li class="flex items-center gap-3 text-slate-400 text-sm"><span class="material-symbols-outlined text-slate-600 text-sm">cancel</span> Early access to tickets</li>
+        <li class="flex items-center gap-3 text-slate-400 text-sm"><span class="material-symbols-outlined text-slate-600 text-sm">cancel</span> Loyalty rewards</li>
+      </ul>
+      <a href="/LANDING_PAGE.html" class="block w-full py-3 text-center rounded-xl text-white text-sm font-bold border border-white/20 hover:bg-white/5 transition-all">Get Started Free</a>
+    </div>
+
+    <!-- Gold — highlighted -->
+    <div class="rounded-3xl p-8 flex flex-col relative overflow-hidden border border-indigo-500/40" style="background:linear-gradient(135deg,rgba(79,70,229,.15),rgba(124,58,237,.15))">
+      <div class="absolute top-4 right-4 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</div>
+      <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl"></div>
+      <div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-6 relative z-10">
+        <span class="material-symbols-outlined text-indigo-400">stars</span>
+      </div>
+      <h3 class="font-h3-cinematic text-white text-xl mb-1 relative z-10">Gold</h3>
+      <p class="text-slate-400 text-sm mb-6 relative z-10">For the passionate cinema lover</p>
+      <div class="mb-6 relative z-10">
+        <span class="text-4xl font-black text-white">$9.99</span>
+        <span class="text-slate-400 text-sm ml-2">/ month</span>
+      </div>
+      <ul class="space-y-3 mb-8 flex-1 relative z-10">
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Everything in Standard</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> 20% off all tickets</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> 48h early booking access</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> 1 free ticket per month</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Loyalty points × 2</li>
+      </ul>
+      <button class="w-full py-3 rounded-xl text-white text-sm font-bold transition-all hover:opacity-90 relative z-10" style="background:linear-gradient(to right,#4f46e5,#7c3aed)" onclick="alert('Gold membership coming soon! Register your interest at admin@cinema.com')">Join Gold</button>
+    </div>
+
+    <!-- Platinum -->
+    <div class="glass-panel rounded-3xl p-8 flex flex-col hover:border-yellow-500/30 transition-all">
+      <div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-6">
+        <span class="material-symbols-outlined text-yellow-400">diamond</span>
+      </div>
+      <h3 class="font-h3-cinematic text-white text-xl mb-1">Platinum</h3>
+      <p class="text-slate-400 text-sm mb-6">The ultimate cinematic lifestyle</p>
+      <div class="mb-6">
+        <span class="text-4xl font-black text-white">$24.99</span>
+        <span class="text-slate-400 text-sm ml-2">/ month</span>
+      </div>
+      <ul class="space-y-3 mb-8 flex-1">
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Everything in Gold</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Unlimited free tickets</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> VIP lounge access</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Exclusive premiere invites</li>
+        <li class="flex items-center gap-3 text-slate-300 text-sm"><span class="material-symbols-outlined text-green-400 text-sm">check_circle</span> Dedicated concierge</li>
+      </ul>
+      <button class="w-full py-3 rounded-xl text-white text-sm font-bold border border-yellow-500/30 hover:bg-yellow-500/10 transition-all" onclick="alert('Platinum membership coming soon! Register your interest at admin@cinema.com')">Join Platinum</button>
+    </div>
+
+  </div>
+
+  <!-- Weekly promo cards -->
+  <h2 class="font-h2-cinematic text-white mb-8">This Week's Deals</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="glass-panel rounded-3xl p-6 flex gap-4 items-start">
+      <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-green-400">local_offer</span></div>
+      <div>
+        <h4 class="text-white font-bold mb-1">Tuesday Saver</h4>
+        <p class="text-slate-400 text-sm">50% off all Standard seats every Tuesday. No membership required — just show up and enjoy.</p>
+        <span class="inline-block mt-3 text-xs font-bold text-green-400 bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full">Every Tuesday</span>
+      </div>
+    </div>
+    <div class="glass-panel rounded-3xl p-6 flex gap-4 items-start">
+      <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-blue-400">groups</span></div>
+      <div>
+        <h4 class="text-white font-bold mb-1">Group Bundle</h4>
+        <p class="text-slate-400 text-sm">Book 6+ tickets for the same showtime and the cheapest ticket is free. Perfect for a night out.</p>
+        <span class="inline-block mt-3 text-xs font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full">Always on</span>
+      </div>
+    </div>
+    <div class="glass-panel rounded-3xl p-6 flex gap-4 items-start">
+      <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-purple-400">family_restroom</span></div>
+      <div>
+        <h4 class="text-white font-bold mb-1">Family Matinée</h4>
+        <p class="text-slate-400 text-sm">Morning screenings before 12:00 are 30% off for families of 3 or more. Weekends included.</p>
+        <span class="inline-block mt-3 text-xs font-bold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">Weekends</span>
+      </div>
+    </div>
+    <div class="glass-panel rounded-3xl p-6 flex gap-4 items-start">
+      <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-indigo-400">school</span></div>
+      <div>
+        <h4 class="text-white font-bold mb-1">Student Discount</h4>
+        <p class="text-slate-400 text-sm">Valid student ID gets you 25% off any ticket, any day, any screen. Just show your card at checkout.</p>
+        <span class="inline-block mt-3 text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Every day</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 mt-auto border-t border-white/5">
+  <div class="flex flex-col items-center justify-center gap-6 px-8 max-w-[1440px] mx-auto">
+    <div class="text-xl font-black text-indigo-500">CINE LUXE</div>
+    <div class="flex gap-8">
+      <a href="#" class="text-slate-600 hover:text-indigo-400 transition-colors text-xs uppercase tracking-widest">Privacy Policy</a>
+      <a href="#" class="text-slate-600 hover:text-indigo-400 transition-colors text-xs uppercase tracking-widest">Terms of Service</a>
+      <a href="#" class="text-slate-600 hover:text-indigo-400 transition-colors text-xs uppercase tracking-widest">Help Center</a>
+      <a href="#" class="text-slate-600 hover:text-indigo-400 transition-colors text-xs uppercase tracking-widest">Contact Us</a>
+    </div>
+    <p class="text-slate-600 text-xs uppercase tracking-widest">© 2024 CINE LUXE. BEYOND CINEMATIC BOUNDARIES.</p>
+  </div>
+</footer>
+
+<script>
+const TOKEN_KEY = 'cinema_token';
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+const clearToken = () => localStorage.removeItem(TOKEN_KEY);
+async function apiFetch(method, path) {
+  const h = {};
+  const tok = getToken();
+  if (tok) h['Authorization'] = `Bearer ${tok}`;
+  const r = await fetch(path, { method, headers: h });
+  if (!r.ok) { const e = new Error(); e.status = r.status; throw e; }
+  return r.json();
+}
+async function checkAdminNav() {
+  if (!getToken()) return;
+  try {
+    const u = await apiFetch('GET', '/api/auth/me');
+    if (!u?.is_admin) return;
+    const navLinks = document.querySelector('nav .hidden.md\\:flex');
+    if (navLinks && !navLinks.querySelector('[href="/ADMIN.html"]')) {
+      const a = document.createElement('a');
+      a.href = '/ADMIN.html';
+      a.className = 'text-indigo-400 font-bold hover:text-indigo-300 transition-colors text-sm';
+      a.textContent = 'Admin';
+      navLinks.appendChild(a);
+    }
+  } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  checkAdminNav();
+  const navRight = document.getElementById('nav-right');
+  if (getToken()) {
+    navRight.innerHTML = `<button id="nav-logout" class="text-sm text-slate-400 hover:text-red-400 transition-colors">Logout</button>`;
+    document.getElementById('nav-logout').addEventListener('click', () => { clearToken(); location.reload(); });
+    apiFetch('GET', '/api/auth/me').then(u => {
+      document.getElementById('nav-logout').textContent = `${u.full_name.split(' ')[0]} · Logout`;
+    }).catch(() => {});
+  }
+});
+</script>
+</body>
+</html>

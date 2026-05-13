@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cine Luxe - Movie Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#1d00a5",
+                    "on-primary-container": "#ede0ff",
+                    "inverse-primary": "#732ee4",
+                    "on-secondary-fixed-variant": "#5b00c5",
+                    "primary-fixed-dim": "#d2bbff",
+                    "surface": "#15121b",
+                    "surface-container-high": "#2c2833",
+                    "inverse-surface": "#e8dfee",
+                    "on-secondary-fixed": "#250059",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary": "#3f008d",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "on-secondary-container": "#c7aaff",
+                    "on-tertiary-fixed": "#0f0069",
+                    "surface-tint": "#d2bbff",
+                    "surface-dim": "#15121b",
+                    "outline": "#958da1",
+                    "surface-container-lowest": "#100d16",
+                    "on-tertiary-container": "#e6e3ff",
+                    "surface-variant": "#37333e",
+                    "tertiary-fixed-dim": "#c3c0ff",
+                    "on-surface": "#e8dfee",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1d1a24",
+                    "tertiary-fixed": "#e2dfff",
+                    "secondary-fixed-dim": "#d3bbff",
+                    "secondary": "#d3bbff",
+                    "on-surface-variant": "#ccc3d8",
+                    "error-container": "#93000a",
+                    "primary-container": "#7c3aed",
+                    "surface-bright": "#3c3742",
+                    "on-primary": "#3f008e",
+                    "inverse-on-surface": "#332f39",
+                    "surface-container-highest": "#37333e",
+                    "tertiary": "#c3c0ff",
+                    "background": "#15121b",
+                    "secondary-fixed": "#ebddff",
+                    "outline-variant": "#4a4455",
+                    "on-primary-fixed": "#25005a",
+                    "on-tertiary-fixed-variant": "#3323cc",
+                    "secondary-container": "#5d03ca",
+                    "on-error": "#690005",
+                    "primary-fixed": "#eaddff",
+                    "on-background": "#e8dfee",
+                    "surface-container": "#221e28",
+                    "tertiary-container": "#564eec",
+                    "primary": "#d2bbff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "unit": "4px",
+                    "sm": "8px",
+                    "gutter": "24px",
+                    "xxl": "80px",
+                    "container-padding": "32px",
+                    "md": "16px",
+                    "xl": "48px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-ui": ["Space Grotesk"],
+                    "h1-cinematic": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Space Grotesk"],
+                    "h2-cinematic": ["Inter"],
+                    "h3-cinematic": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-ui": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h1-cinematic": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "h2-cinematic": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h3-cinematic": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(17, 24, 39, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .neon-border {
+        border: 1px solid rgba(210, 187, 255, 0.3);
+        box-shadow: 0 0 15px rgba(210, 187, 255, 0.1);
+      }
+      .gradient-overlay {
+        background: linear-gradient(0deg, #15121b 0%, rgba(21, 18, 27, 0.8) 50%, rgba(21, 18, 27, 0) 100%);
+      }
+      .active-glow {
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-indigo-500/10">
+<div class="flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black tracking-tighter bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">CINE LUXE</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-white border-b-2 border-indigo-500 pb-1 font-body-md" href="#">Movies</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-body-md" href="#">Cinemas</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-body-md" href="#">Offers</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-body-md" href="#">My Bookings</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-colors">notifications</button>
+<div class="w-10 h-10 rounded-full border border-indigo-500/30 overflow-hidden cursor-pointer active:scale-95 transition-all">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close-up professional headshot of a stylish man with a clean beard and modern haircut, set against a dark, minimalist studio background with subtle indigo backlighting. The lighting is dramatic and high-contrast, echoing a cinematic futuristic aesthetic with sharp focus and deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYEF0qb8q50frUTgMHmBL_ox6Bpm14Fj7mzSKLmpmSjC_V5yiYHVQlFjutxZ5KRW4CGZKtw4EPnmcW79Ak2HJu2Nj6mhus8ifCOaPN-EpVQEySAAW5ShpytRNr84g3UxglTg_RXOj-FgGtcueq303IfAXfRsHHGPfOxOxHaHzM0lzzv-NXle8jeO3Cs7LbqYTF1sS0NFar7JCqeemdFvfsXT57ftq8I5Iw5-jQVerVKpaxg_aFihHpQ_w6-CFaiDjgJmfok9Er4XU"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="relative">
+<!-- Hero Section / Backdrop -->
+<section class="relative w-full h-[870px] overflow-hidden">
+<img id="movie-backdrop" alt="Movie Backdrop" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1920&q=80"/>
+<div class="absolute inset-0 gradient-overlay"></div>
+<!-- Movie Identity Floating Content -->
+<div class="absolute bottom-0 left-0 w-full px-8 pb-12 max-w-[1440px] mx-auto flex flex-col md:flex-row gap-10 items-end">
+<!-- Poster Card -->
+<div class="hidden md:block w-72 aspect-[2/3] glass-card rounded-2xl overflow-hidden shadow-2xl relative z-10 translate-y-12">
+<img alt="Movie Poster" class="w-full h-full object-cover" data-alt="A high-contrast movie poster for a sci-fi thriller, featuring a mysterious figure in a high-tech obsidian suit standing amidst purple laser beams. The design is sleek and modern with bold typography and a glowing digital aesthetic. The background is a dense, futuristic landscape with a cold, blue-toned atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBzzJT--iEAiuriPdZ6vtXwRSZStPivU_5rETuVL8kLUc43QObwymk1pdP6zahdKJ7t2AR4s2xFKVRjtUkVfIrwvd-WidlVI27bv90GtiyjZSw2UCHfmNTUC8UxwD5Y6vIdOPYaSNUlNak2MK9y_5aeMTBcZjNeGHkJYzGC_F5bg1-Su5-MeweY9MiLTrT_3pGpi_NldtTgBPAOtfArxJ-eIJV9qlVIeKD9yDd8ptMhsEJme9-U9iuNKlADnYqNHp5DEIE6lSbwMc"/>
+</div>
+<!-- Basic Info -->
+<div class="flex-1 space-y-4 pb-4">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 glass-card rounded-full text-label-caps text-primary border-primary/20">SCI-FI ACTION</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-ui font-bold">9.2 / 10</span>
+</div>
+</div>
+<h1 id="movie-title" class="font-h1-cinematic text-on-background text-6xl uppercase tracking-tighter">NEON GENESIS: THE AWAKENING</h1>
+<p id="movie-description" class="font-body-lg text-on-surface-variant max-w-2xl">
+                        In the year 2084, humanity's last hope rests in the hands of a rogue AI specialist who discovers a world-shattering secret hidden within the city's neon-drenched foundations.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="max-w-[1440px] mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: About the Film -->
+<div class="lg:col-span-8 space-y-10">
+
+  <!-- Metadata chips — populated by JS -->
+  <div id="movie-meta-chips" class="flex flex-wrap gap-3"></div>
+
+  <!-- Poster + Synopsis -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+    <!-- Poster -->
+    <div class="aspect-[2/3] rounded-2xl overflow-hidden glass-card shadow-2xl shadow-indigo-500/20">
+      <img id="detail-poster" alt="Movie Poster" class="w-full h-full object-cover"/>
+    </div>
+    <!-- Synopsis & details -->
+    <div class="md:col-span-2 glass-card rounded-2xl p-8 space-y-6">
+      <h3 class="font-h3-cinematic text-white text-xl">Synopsis</h3>
+      <p id="detail-synopsis" class="text-on-surface-variant leading-relaxed text-base"></p>
+      <div id="detail-facts" class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10"></div>
+    </div>
+  </div>
+
+  <!-- Still images strip — four posters from TMDB at different sizes as "stills" -->
+  <div class="space-y-4">
+    <h3 class="font-h3-cinematic text-white text-xl">More Images</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="stills-grid">
+      <!-- Populated by JS using poster with different crop sizes -->
+    </div>
+  </div>
+
+</div>
+<!-- Right Column: Showtimes & Booking -->
+<div class="lg:col-span-4 space-y-8">
+<div class="glass-card rounded-3xl p-8 sticky top-28 neon-border">
+<h3 class="font-h3-cinematic text-white mb-6">SELECT SHOWTIME</h3>
+<div class="space-y-6">
+<!-- Date Selector -->
+<div class="flex justify-between items-center mb-4">
+<p class="font-label-ui text-white" id="showtime-date">Loading…</p>
+<span class="material-symbols-outlined text-primary text-xl">calendar_today</span>
+</div>
+<!-- Slots -->
+<div class="grid grid-cols-2 gap-4" id="showtimes-grid">
+<div class="p-4 rounded-xl glass-card border-primary-container/40 bg-primary-container/10 border-2 cursor-pointer transition-all active-glow">
+<p class="text-white font-bold font-h3-cinematic">18:30</p>
+<p class="text-on-surface-variant text-xs font-label-caps mt-2">LUXE SCREEN 1</p>
+<div class="mt-3 flex gap-1">
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+</div>
+<p class="text-[10px] text-primary mt-1 font-label-ui">50% AVAILABLE</p>
+</div>
+<div class="p-4 rounded-xl glass-card border-white/5 hover:border-white/20 cursor-pointer transition-all">
+<p class="text-white font-bold font-h3-cinematic">21:15</p>
+<p class="text-on-surface-variant text-xs font-label-caps mt-2">IMAX EXPERIENCE</p>
+<div class="mt-3 flex gap-1">
+<div class="h-1 flex-1 bg-error rounded-full"></div>
+<div class="h-1 flex-1 bg-error rounded-full"></div>
+<div class="h-1 flex-1 bg-error rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-variant rounded-full"></div>
+</div>
+<p class="text-[10px] text-error mt-1 font-label-ui">ALMOST FULL</p>
+</div>
+<div class="p-4 rounded-xl glass-card border-white/5 hover:border-white/20 cursor-pointer transition-all">
+<p class="text-white font-bold font-h3-cinematic">23:45</p>
+<p class="text-on-surface-variant text-xs font-label-caps mt-2">LUXE SCREEN 2</p>
+<div class="mt-3 flex gap-1">
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+</div>
+<p class="text-[10px] text-primary mt-1 font-label-ui">HIGH AVAILABILITY</p>
+</div>
+<div class="p-4 rounded-xl glass-card border-white/5 opacity-50 cursor-not-allowed">
+<p class="text-white font-bold font-h3-cinematic">15:00</p>
+<p class="text-on-surface-variant text-xs font-label-caps mt-2">MATINEE 1</p>
+<p class="text-[10px] text-slate-500 mt-4 font-label-ui">SOLD OUT</p>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex justify-between items-center py-4 border-t border-white/5">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-xs text-on-surface-variant font-label-ui">Standard</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<span class="text-xs text-on-surface-variant font-label-ui">Premium</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-xs text-on-surface-variant font-label-ui">VIP</span>
+</div>
+</div>
+<!-- CTA -->
+<button id="proceed-btn" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-5 rounded-2xl font-h3-cinematic text-lg tracking-wider active-glow hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-indigo-600/20">
+                            PROCEED TO BOOKING
+                        </button>
+<p class="text-center text-on-surface-variant text-xs opacity-60">
+                            Cancellation available up to 45 mins before showtime.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 mt-auto border-t border-white/5">
+<div class="flex flex-col items-center justify-center gap-6 px-8 max-w-[1440px] mx-auto">
+<div class="text-xl font-black text-indigo-500">CINE LUXE</div>
+<div class="flex gap-8">
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-label-caps uppercase tracking-widest text-xs" href="#">Privacy Policy</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-label-caps uppercase tracking-widest text-xs" href="#">Terms of Service</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-label-caps uppercase tracking-widest text-xs" href="#">Help Center</a>
+<a class="text-slate-600 hover:text-indigo-400 transition-colors font-label-caps uppercase tracking-widest text-xs" href="#">Contact Us</a>
+</div>
+<p class="text-slate-600 font-label-caps uppercase tracking-widest text-xs">© 2024 CINE LUXE. BEYOND CINEMATIC BOUNDARIES.</p>
+</div>
+</footer>
+<script>
+const TOKEN_KEY = 'cinema_token';
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+const clearToken = () => localStorage.removeItem(TOKEN_KEY);
+async function apiFetch(method, path, body) {
+  const h = {};
+  const tok = getToken();
+  if (tok) h['Authorization'] = `Bearer ${tok}`;
+  if (body != null) h['Content-Type'] = 'application/json';
+  const init = { method, headers: h };
+  if (body != null) init.body = JSON.stringify(body);
+  const r = await fetch(path, init);
+  if (r.status === 204) return null;
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(d.detail || `HTTP ${r.status}`); e.status = r.status; throw e; }
+  return d;
+}
+function getParam(name) { return new URLSearchParams(location.search).get(name); }
+
+let selectedShowtimeId = null;
+
+function fmtTime(iso) {
+  return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function renderShowtimeSlot(st) {
+  const available = 1; // availability shown as dot bars (we don't have seat counts here)
+  const d = document.createElement('div');
+  d.className = 'p-4 rounded-xl border-2 cursor-pointer transition-all glass-card ' +
+    (selectedShowtimeId === st.id ? 'border-primary-container/40 bg-primary-container/10 active-glow' : 'border-white/5 hover:border-white/20');
+  d.dataset.id = st.id;
+  d.innerHTML = `
+    <p class="text-white font-bold font-h3-cinematic">${fmtTime(st.start_time)}</p>
+    <p class="text-on-surface-variant text-xs mt-1 uppercase tracking-wide">${st.screen?.name || 'Screen'}</p>
+    <p class="text-[10px] text-primary mt-2 font-label-ui">$${st.price_regular} · VIP $${st.price_vip}</p>`;
+  d.addEventListener('click', () => {
+    selectedShowtimeId = st.id;
+    sessionStorage.setItem('current_showtime_id', st.id);
+    document.querySelectorAll('#showtimes-grid > div').forEach(el => {
+      el.classList.toggle('border-primary-container/40', el.dataset.id === st.id);
+      el.classList.toggle('bg-primary-container/10', el.dataset.id === st.id);
+      el.classList.toggle('active-glow', el.dataset.id === st.id);
+      el.classList.toggle('border-white/5', el.dataset.id !== st.id);
+    });
+  });
+  return d;
+}
+
+async function loadPage() {
+  const movieId = getParam('movie_id');
+  if (!movieId) return;
+
+  // Load movie details
+  try {
+    const m = await apiFetch('GET', `/api/movies/${movieId}`);
+    const titleEl = document.getElementById('movie-title');
+    const descEl = document.getElementById('movie-description');
+    if (titleEl) titleEl.textContent = m.title.toUpperCase();
+    if (descEl) descEl.textContent = m.description || '';
+    document.title = `Cine Luxe — ${m.title}`;
+
+    // Update genre badge in hero
+    const badge = document.querySelector('.px-3.py-1.glass-card.rounded-full');
+    if (badge) badge.textContent = `${m.genre.toUpperCase()} · ${m.rating}`;
+
+    // Backdrop: use poster as backdrop when available (blurred behind gradient)
+    if (m.poster_url) {
+      document.querySelectorAll('img[alt="Movie Poster"]').forEach(img => { img.src = m.poster_url; });
+      const backdrop = document.getElementById('movie-backdrop');
+      if (backdrop) backdrop.src = m.poster_url;
+    }
+
+    // ── Populate "About the Film" section ───────────────────────────────────
+    // Detail poster
+    const detailPoster = document.getElementById('detail-poster');
+    if (detailPoster && m.poster_url) detailPoster.src = m.poster_url;
+
+    // Synopsis
+    const synopsisEl = document.getElementById('detail-synopsis');
+    if (synopsisEl) synopsisEl.textContent = m.description || 'No synopsis available.';
+
+    // Metadata facts grid
+    const factsEl = document.getElementById('detail-facts');
+    if (factsEl) {
+      const facts = [
+        { label: 'Genre',    value: m.genre },
+        { label: 'Rating',   value: m.rating },
+        { label: 'Duration', value: `${m.duration_minutes} min` },
+        { label: 'Language', value: m.language },
+        { label: 'Release',  value: m.release_date },
+      ];
+      factsEl.innerHTML = facts.map(f => `
+        <div>
+          <p class="text-slate-500 text-xs font-label-caps uppercase tracking-wider mb-1">${f.label}</p>
+          <p class="text-white font-label-ui font-bold">${f.value}</p>
+        </div>`).join('');
+    }
+
+    // Meta chips (genre + rating badges in the new left-column header area)
+    const chipsEl = document.getElementById('movie-meta-chips');
+    if (chipsEl) {
+      chipsEl.innerHTML = `
+        <span class="px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-full text-indigo-400 text-xs font-bold uppercase tracking-wide">${m.genre}</span>
+        <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-slate-300 text-xs font-bold">${m.rating}</span>
+        <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-slate-300 text-xs font-bold">${m.duration_minutes} min</span>
+        <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-slate-400 text-xs">${m.release_date}</span>`;
+    }
+
+    // Stills grid: show poster at 4 different TMDB crop sizes as "stills"
+    const stillsGrid = document.getElementById('stills-grid');
+    if (stillsGrid && m.poster_url) {
+      // Use the poster itself — display it at different aspect ratios to simulate stills
+      const cropStyles = [
+        'object-top',
+        'object-center',
+        'object-bottom',
+        'object-[50%_30%]',
+      ];
+      stillsGrid.innerHTML = cropStyles.map(crop => `
+        <div class="aspect-video rounded-xl overflow-hidden glass-card">
+          <img src="${m.poster_url}" alt="${m.title} still" class="w-full h-full object-cover ${crop} scale-150"/>
+        </div>`).join('');
+    }
+  } catch(e) { console.error('movie load', e); }
+
+  // Load showtimes
+  const grid = document.getElementById('showtimes-grid');
+  const dateEl = document.getElementById('showtime-date');
+  if (!grid) return;
+  grid.innerHTML = '<div class="col-span-2 text-slate-500 text-sm py-2">Loading showtimes…</div>';
+  try {
+    const showtimes = await apiFetch('GET', `/api/showtimes?movie_id=${movieId}&limit=8`);
+    if (!showtimes.length) {
+      grid.innerHTML = '<div class="col-span-2 text-slate-400 text-sm">No upcoming showtimes.</div>';
+      return;
+    }
+    if (dateEl) dateEl.textContent = fmtDate(showtimes[0].start_time);
+    grid.innerHTML = '';
+    showtimes.forEach(st => grid.appendChild(renderShowtimeSlot(st)));
+    // Auto-select first
+    selectedShowtimeId = showtimes[0].id;
+    sessionStorage.setItem('current_showtime_id', showtimes[0].id);
+    grid.firstChild?.classList.add('border-primary-container/40','bg-primary-container/10','active-glow');
+    grid.firstChild?.classList.remove('border-white/5');
+  } catch(e) {
+    grid.innerHTML = `<div class="col-span-2 text-red-400 text-sm">Failed: ${e.message}</div>`;
+  }
+}
+
+async function checkAdminNav() {
+  if (!getToken()) return;
+  try {
+    const u = await apiFetch('GET', '/api/auth/me');
+    if (!u?.is_admin) return;
+    const navLinks = document.querySelector('nav .hidden.md\\:flex');
+    if (navLinks && !navLinks.querySelector('[href="/ADMIN.html"]')) {
+      const a = document.createElement('a');
+      a.href = '/ADMIN.html';
+      a.className = 'text-indigo-400 font-bold hover:text-indigo-300 transition-colors font-body-md';
+      a.textContent = 'Admin';
+      navLinks.appendChild(a);
+    }
+  } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadPage();
+  checkAdminNav();
+
+  document.getElementById('proceed-btn')?.addEventListener('click', () => {
+    if (!getToken()) { location.href = '/LANDING_PAGE.html'; return; }
+    if (!selectedShowtimeId) { alert('Please select a showtime first.'); return; }
+    location.href = `/SELECT_SEATS.html?showtime_id=${selectedShowtimeId}`;
+  });
+
+  // BOOK TICKETS hero button
+  document.querySelectorAll('button').forEach(b => {
+    if (b.textContent.includes('BOOK TICKETS')) {
+      b.addEventListener('click', () => document.getElementById('proceed-btn')?.click());
+    }
+  });
+
+  // Nav My Bookings
+  document.querySelectorAll('a').forEach(a => {
+    const t = a.textContent.trim();
+    if (t === 'My Bookings') a.href = '/MY_BOOKINGS.html';
+    if (t === 'Cinemas')     a.href = '/CINEMAS.html';
+    if (t === 'Offers')      a.href = '/OFFERS.html';
+    if (t === 'Movies')      a.href = '/LANDING_PAGE.html';
+  });
+});
+</script>
+</body></html>

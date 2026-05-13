@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: cinema-local
+
+scrape_configs:
+  # otel-collector exposes all OTLP metrics in Prometheus format on :8889
+  - job_name: cinema_api
+    static_configs:
+      - targets: ["otel-collector:8889"]
+    metrics_path: /metrics
+
+  # Scrape Prometheus's own process metrics
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
