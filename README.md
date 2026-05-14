@@ -360,3 +360,5 @@ MIT — free to use for educational purposes.
 - Docker Compose orchestration — 12 services (R9)
 - RabbitMQ notification pipeline + daily report worker (R10)
 - OpenTelemetry → Prometheus + Grafana + Loki (R12)
+
+- <!-- Reviewed by Ergasheva Fotima - report writer 1 -->
