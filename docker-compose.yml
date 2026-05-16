@@ -1,3 +1,44 @@
+# CineLuxe — docker-compose.yml
+# DevOps / Deployment: Hikmatov Dilshodbek (U2310091)
+#
+# This file starts the ENTIRE CineLuxe system with ONE command:
+#   docker-compose up -d
+#
+# What is Docker Compose?
+# It is like a recipe book. Each "service" below is one container
+# (a small isolated computer running one job).
+# Docker Compose starts all 12 containers in the right order.
+#
+# Our 12 containers:
+#   1.  cinema_postgres        — Main database (stores users, movies, bookings)
+#   2.  cinema_redis           — Fast memory store (seat locks, rate limiting)
+#   3.  cinema_mongodb         — Document store (daily analytics reports)
+#   4.  cinema_rabbitmq        — Message broker (sends booking confirmation events)
+#   5.  cinema_api             — FastAPI backend (the brain of the system)
+#   6.  cinema_notification_worker — Reads RabbitMQ, simulates sending emails
+#   7.  cinema_daily_report    — Runs at midnight, makes daily report in MongoDB
+#   8.  cinema_nginx           — The front door — routes all traffic on port 80
+#   9.  cinema_otel            — Collects traces, metrics, and logs
+#   10. cinema_prometheus      — Stores metrics history
+#   11. cinema_loki            — Stores logs
+#   12. cinema_grafana         — Dashboard to view all monitoring data
+#
+# Startup order (Docker waits for health checks):
+#   Step 1: Start postgres + redis + mongodb + rabbitmq
+#   Step 2: Wait for all 4 to be healthy
+#   Step 3: Start api + notification_worker + daily_report_worker
+#   Step 4: Start nginx (exposes port 80 to the internet)
+#   Step 5: Start observability stack (otel, prometheus, loki, grafana)
+#
+# Named volumes (data that survives container restarts):
+#   postgres_data, redis_data, mongo_data, rabbitmq_data,
+#   prometheus_data, loki_data, grafana_data
+#
+# Network: all containers talk to each other on "cinema_net"
+#
+# Deployed at: http://138.68.76.246
+# GitHub: https://github.com/LightStar-cinema/cinema-booking
+
 networks:
   cinema_net:
     driver: bridge
