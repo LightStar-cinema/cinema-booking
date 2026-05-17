@@ -1,3 +1,44 @@
+# Booking and BookingSeat Database Models
+# Database Engineer: Madirimova Nargiza (U2310149)
+#
+# This file defines TWO of our most important database tables.
+#
+# TABLE 1: bookings
+# Stores one reservation made by one user for one showtime.
+#
+# Columns:
+#   id               — UUID primary key (unique ID for this booking)
+#   user_id          — FK to users table (who made this booking)
+#   showtime_id      — FK to showtimes table (which showing they booked)
+#   status           — ENUM: PENDING, CONFIRMED, or CANCELLED
+#                      PENDING  = seats reserved, payment not done yet
+#                      CONFIRMED = payment done, booking is valid
+#                      CANCELLED = user cancelled or payment failed
+#   booking_reference — Short human-readable code (e.g. CN-X7Y9Z2)
+#   total_amount     — Total price for all seats combined
+#   created_at       — When the booking was created
+#   updated_at       — When it was last changed
+#
+# TABLE 2: booking_seats
+# This is the JUNCTION TABLE between bookings and seats.
+# One booking can have many seats. One seat can be in many bookings
+# (at different showtimes on different days).
+# This many-to-many relationship is solved by this junction table.
+#
+# Columns:
+#   id          — UUID primary key
+#   booking_id  — FK to bookings table
+#   seat_id     — FK to seats table
+#   showtime_id — FK to showtimes table (redundant but needed for the UNIQUE constraint)
+#   price       — Price per seat AT THE TIME OF BOOKING (snapshot)
+#                 Important: if prices change later, this booking is unaffected
+#
+# THE MOST IMPORTANT CONSTRAINT:
+#   UNIQUE(seat_id, showtime_id)
+#   This means: the same seat at the same showtime can only appear ONCE.
+#   This is the database-level guard against double-booking.
+#   Even if the application code has a bug, the database itself
+#   will reject any attempt to book the same seat twice.
 import enum
 import uuid
 from decimal import Decimal
