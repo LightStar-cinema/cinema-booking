@@ -1,3 +1,47 @@
+# Payments Router — Processing Payments
+# API Documentation: Ergasheva Fotima (U2310076)
+#
+# This file handles payment processing for bookings.
+#
+# ENDPOINT 1: POST /api/payments
+# What it does: Processes a payment and confirms the booking
+# Who can use it: Logged-in users only (JWT token required)
+# Request body:
+#   {
+#     "booking_id": "uuid of the pending booking",
+#     "payment_method": "CARD",
+#     "card_number": "4242424242424242",
+#     "expiry_month": 12,
+#     "expiry_year": 2027,
+#     "cvv": "123"
+#   }
+# Response:
+#   {
+#     "id": "payment-uuid",
+#     "status": "COMPLETED",
+#     "transaction_id": "TXN-12345",
+#     "amount": 30.00
+#   }
+# Error codes:
+#   400 — invalid card details
+#   403 — booking does not belong to this user
+#   404 — booking not found
+#   409 — booking already paid or cancelled
+#
+# WHAT HAPPENS AFTER SUCCESSFUL PAYMENT:
+# 1. Payment record created in PostgreSQL (status: COMPLETED)
+# 2. Booking status updated to CONFIRMED in PostgreSQL
+# 3. booking_confirmed event published to RabbitMQ
+# 4. notification_worker picks up the event and logs simulated email
+# 5. HTTP 201 response returned to frontend with payment details
+#
+# ENDPOINT 2: GET /api/payments/{id}
+# What it does: Returns details of one payment
+# Who can use it: Owner of the payment only
+# Response: Full payment object with status, amount, transaction ID
+# Error codes:
+#   403 — not your payment
+#   404 — payment not found
 import uuid
 from typing import Annotated
 
