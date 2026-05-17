@@ -1,3 +1,25 @@
+# ============================================================
+# CineLuxe — observability/prometheus.yml
+# DevOps / Deployment: Hikmatov Dilshodbek (U2310091)
+#
+# What is Prometheus?
+#   Prometheus is a metrics database. It "scrapes" (pulls)
+#   numbers from our services every few seconds and stores them.
+#   Example metrics: requests/sec, error rate, booking count.
+#
+# What does this file configure?
+#   - Scrape interval: how often Prometheus collects data
+#   - Targets: which containers to collect metrics FROM
+#     * otel-collector:8889  → receives metrics from FastAPI via OTLP
+#
+# Flow:
+#   FastAPI → OTLP → otel-collector → Prometheus → Grafana dashboard
+#
+# Container name: cinema_prometheus
+# Data stored in: prometheus_data (Docker named volume)
+# UI available at: http://localhost:9090
+# ============================================================
+
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
