@@ -1,3 +1,40 @@
+# Authentication Router — Login and Registration
+# API Documentation: Ergasheva Fotima (U2310076)
+#
+# This file handles how users register and log in to CineLuxe.
+#
+# ENDPOINT 1: POST /api/auth/register
+# What it does: Creates a new user account
+# Who can use it: Anyone (no login needed)
+# Request body: { "email": "...", "password": "...", "full_name": "..." }
+# Response: { "access_token": "...", "token_type": "bearer" }
+# Rate limited: max 3 attempts per IP per 60 seconds (prevents bot signups)
+# Error codes:
+#   400 — email already exists
+#   422 — missing required fields
+#   429 — too many registration attempts
+#
+# ENDPOINT 2: POST /api/auth/login
+# What it does: Signs in an existing user and returns a JWT token
+# Who can use it: Anyone (no login needed)
+# Request body: form data with username (email) and password
+# Response: { "access_token": "...", "token_type": "bearer" }
+# Error codes:
+#   401 — wrong email or password
+#
+# ENDPOINT 3: GET /api/auth/me
+# What it does: Returns the profile of the currently logged-in user
+# Who can use it: Logged-in users only (JWT token required)
+# Response: { "id": "...", "email": "...", "full_name": "...", "is_admin": false }
+# Error codes:
+#   401 — not logged in (no token or invalid token)
+#
+# HOW JWT TOKENS WORK:
+# 1. User logs in with email + password
+# 2. Backend checks if password is correct
+# 3. Backend creates a signed JWT token (expires in 24 hours)
+# 4. User stores token and sends it with every future request
+# 5. Backend verifies the signature — no database lookup needed
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
