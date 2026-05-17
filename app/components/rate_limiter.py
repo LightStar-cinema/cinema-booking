@@ -1,3 +1,35 @@
+# =============================================================================
+# rate_limiter.py — Token Bucket Rate Limiter (Built From Scratch)
+# Written by: Hazratov Sardorbek (U2310090)
+#
+# This component was built entirely from scratch.
+# No external rate-limiting libraries are used.
+# The algorithm is based on Martin Kleppmann's "Designing Data-Intensive
+# Applications" (DDIA) — the token bucket algorithm.
+#
+# What is a token bucket?
+# Imagine a bucket that holds tokens. Every second, new tokens are added.
+# Each request costs one token. If the bucket is empty, the request is blocked.
+# This gives users a "burst" allowance while still enforcing a rate limit.
+#
+# How it works:
+# 1. User makes a request
+# 2. We run a Redis Lua script (atomic — cannot be interrupted)
+# 3. Script calculates how many tokens have refilled since last request
+# 4. If tokens >= 1: subtract 1 token, allow the request
+# 5. If tokens == 0: block the request, return HTTP 429 with Retry-After
+#
+# Why Redis Lua scripts?
+# The check-and-update must be atomic (happen in one step).
+# If two requests arrive at the same millisecond, we cannot let both through.
+# Redis Lua scripts run atomically — no race conditions possible.
+#
+# Where it is used:
+# - POST /api/bookings: max 5 requests per user per 60 seconds
+# - POST /api/auth/register: max 3 requests per IP per 60 seconds
+# =============================================================================
+
+
 """
 Token-bucket rate limiter — built from scratch, Redis-backed.
 
