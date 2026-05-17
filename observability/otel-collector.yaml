@@ -1,3 +1,26 @@
+# ============================================================
+# CineLuxe — observability/otel-collector.yaml
+# DevOps / Deployment: Hikmatov Dilshodbek (U2310091)
+#
+# What is the OpenTelemetry Collector?
+#   It is the CENTRAL HUB for all observability signals.
+#   The API sends traces, metrics, and logs to this ONE place,
+#   and the collector forwards them to the right destinations.
+#
+# Pipelines configured:
+#   Traces  → stdout (logged for debugging)
+#   Metrics → Prometheus (scraped on port 8889)
+#   Logs    → Loki (pushed via HTTP)
+#
+# Why use a collector instead of direct export?
+#   - API only needs ONE connection (to otel-collector)
+#   - Easy to add new destinations without changing app code
+#   - Batching and retry logic built-in
+#
+# Container name: cinema_otel
+# Receives on: OTLP gRPC port 4317, HTTP port 4318
+# ============================================================
+
 receivers:
   otlp:
     protocols:
