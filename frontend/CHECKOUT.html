@@ -1,3 +1,25 @@
+<!--
+  ============================================================
+  CineLuxe — Checkout / Payment Page
+  Frontend Developer: Islomova Mushtari (U2310103)
+  ============================================================
+
+  WHAT THIS PAGE DOES:
+  Final step before booking is confirmed.
+  User enters card details and clicks Pay Now.
+
+  SECTIONS:
+  1. Order summary (right) — selected seats + total price
+  2. Payment form (left)   — card number, expiry, CVV
+  3. Pay Now button        — big red, impossible to miss
+
+  HOW IT CONNECTS TO THE BACKEND:
+  - GET  /api/bookings/{id}  loads the pending booking details
+  - POST /api/payments       submits payment, confirms booking
+  - On success → shows booking reference number to user
+  ============================================================
+-->
+
 <!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
