@@ -1,3 +1,30 @@
+<!--
+  ============================================================
+  CineLuxe — Seat Selection Page
+  Frontend Developer: Islomova Mushtari (U2310103)
+  ============================================================
+
+  WHAT THIS PAGE DOES:
+  Shows a visual map of all seats in the cinema hall.
+  User clicks seats to select them before booking.
+
+  SEAT COLORS:
+  - Green  = available (can click to select)
+  - Gray   = already booked by someone else
+  - Yellow = currently selected by this user
+
+  REAL-TIME UPDATES WITH WEBSOCKET:
+  This page keeps a live connection to the server (WebSocket).
+  If Bob books seat A5 while Alice is on this page,
+  Alice sees A5 turn gray IMMEDIATELY without refreshing.
+  This is much better than asking the server every few seconds.
+
+  HOW IT CONNECTS TO THE BACKEND:
+  - GET /api/showtimes/{id}  loads the seat map data
+  - WS  /ws/showtimes/{id}   opens WebSocket for live updates
+  - POST /api/bookings       reserves selected seats on confirmation
+  ============================================================
+-->
 <!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
