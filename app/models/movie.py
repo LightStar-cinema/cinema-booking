@@ -1,3 +1,41 @@
+# =============================================================================
+# Movie Database Model
+# Database Engineer: Madirimova Nargiza (U2310149)
+#
+# This file defines the movies table in PostgreSQL.
+#
+# TABLE: movies
+# Stores the entire film catalogue for CineLuxe.
+#
+# Columns:
+#   id             — UUID primary key
+#   title          — Movie name (e.g. "Inception")
+#   description    — Plot summary shown on the movie details page
+#   genre          — Category (Action, Drama, Sci-Fi, etc.)
+#   duration_minutes — How long the movie is (used to calculate end_time)
+#   rating         — Age rating ENUM: G, PG, PG-13, R, NC-17
+#   release_date   — When the movie was released (or will be released)
+#   language       — Language of the film
+#   poster_url     — Path to the poster image file
+#   is_active      — Boolean: true = showing now, false = hidden from listing
+#   is_coming_soon — Boolean: true = upcoming film (shows in Coming Soon section)
+#   created_at     — Auto timestamp
+#   updated_at     — Auto timestamp (updated every time movie is changed)
+#
+# DESIGN DECISIONS:
+#
+# Why is_active instead of deleting?
+#   We use "soft delete" — setting is_active=false instead of actually
+#   deleting the row. This preserves historical data (bookings still
+#   reference the movie even after it stops showing).
+#
+# Why ENUM for rating?
+#   ENUM types only allow specific values: G, PG, PG-13, R, NC-17.
+#   This prevents typos like "Pg-13" or "pg13" being saved.
+#
+# RELATIONSHIPS:
+#   One movie can have MANY showtimes (one-to-many)
+# =============================================================================
 import enum
 from datetime import date
 
