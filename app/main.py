@@ -10,6 +10,40 @@ from core.database import AsyncSessionLocal, engine
 from core.telemetry import setup_telemetry
 from messaging.producer import close as close_rabbitmq
 
+# =============================================================================
+# CineLuxe — Cinema Ticket Booking System
+# Tech Lead / Backend Developer: Hazratov Sardorbek (U2310090)
+#
+# This is the main entry point of the FastAPI application.
+#
+# What this backend does:
+# - Handles user registration and login using JWT tokens
+# - Manages movies, screens, seats, and showtimes
+# - Processes seat bookings with double-booking prevention using Redis locks
+# - Handles payments and sends confirmation events via RabbitMQ
+# - Serves real-time seat availability updates via WebSockets
+# - Rate limits requests using a custom token-bucket algorithm (built from scratch)
+#
+# How it connects to the frontend:
+# - Frontend sends HTTP requests to /api/* endpoints
+# - Backend validates the request, talks to databases, returns JSON response
+# - Frontend uses the JSON to display data on the page
+#
+# How it connects to the database:
+# - Uses SQLAlchemy (async) to talk to PostgreSQL
+# - Uses Redis for fast seat locking
+# - Uses MongoDB for daily analytics reports
+# - Uses RabbitMQ to send booking.confirmed messages to notification worker
+#
+# Tech stack:
+# - Python 3.12 + FastAPI 0.111
+# - PostgreSQL 16 (main relational database — 8 tables)
+# - Redis 7 (seat locks + token-bucket rate limiter)
+# - MongoDB 7 (daily reports collection)
+# - RabbitMQ 3.13 (async messaging — booking confirmations)
+# - OpenTelemetry (traces, metrics, logs → Grafana)
+# =============================================================================
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
