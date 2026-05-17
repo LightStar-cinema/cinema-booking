@@ -1,3 +1,33 @@
+
+# =============================================================================
+# bookings.py — Booking Router
+# Written by: Hazratov Sardorbek (U2310090)
+#
+# This file handles everything related to seat reservations.
+#
+# How booking works step by step:
+# Step 1: User sends POST /api/bookings with showtime_id and seat_ids
+# Step 2: We check the JWT token — is the user logged in?
+# Step 3: We check the rate limiter — did this user book too many times?
+# Step 4: We run a Redis Lua script to lock all the seats atomically
+#         If ANY seat is already locked → return 409 Conflict immediately
+# Step 5: We write a PENDING booking to PostgreSQL
+# Step 6: We return the booking details to the frontend
+#
+# The double-booking prevention has TWO layers:
+# Layer 1 (fast): Redis lock with 30 second TTL
+#   - Blocks anyone else from selecting the seat while you are booking
+# Layer 2 (final): PostgreSQL UNIQUE(seat_id, showtime_id) constraint
+#   - Even if Redis fails, the database will reject a duplicate
+#
+# Endpoints in this file:
+# POST   /api/bookings          — Reserve seats
+# GET    /api/bookings/me       — My booking history
+# GET    /api/bookings/{id}     — One booking detail
+# POST   /api/bookings/{id}/cancel — Cancel a booking
+# =============================================================================
+
+
 import random
 import string
 import uuid
