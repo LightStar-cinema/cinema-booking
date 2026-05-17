@@ -1,3 +1,43 @@
+# Movies Router — Movie Catalogue API
+# API Documentation: Ergasheva Fotima (U2310076)
+#
+# This file handles all movie-related API endpoints.
+#
+# ENDPOINT 1: GET /api/movies
+# What it does: Returns a list of all movies
+# Who can use it: Anyone (no login needed)
+# Query parameters:
+#   ?genre=Action        — filter by genre
+#   ?active_only=true    — only show currently showing movies
+#   ?coming_soon=true    — only show upcoming movies
+# Response: Array of movie objects with title, genre, poster_url, etc.
+#
+# ENDPOINT 2: GET /api/movies/{id}
+# What it does: Returns full details of one movie
+# Who can use it: Anyone
+# Response: Full movie object including all fields
+# Error codes:
+#   404 — movie not found
+#
+# ENDPOINT 3: POST /api/movies
+# What it does: Creates a new movie (adds it to the catalogue)
+# Who can use it: Admin users only (is_admin = true)
+# Request body: { "title": "...", "genre": "...", "rating": "PG-13", ... }
+# Response: The newly created movie object
+# Error codes:
+#   403 — not an admin
+#
+# ENDPOINT 4: PATCH /api/movies/{id}
+# What it does: Updates one or more fields of an existing movie
+# Who can use it: Admin users only
+# Request body: Any fields you want to change
+# Use case: Toggle is_active to hide a movie from the listing
+#
+# ENDPOINT 5: DELETE /api/movies/{id}
+# What it does: Soft-deletes a movie (sets is_active = false)
+# Who can use it: Admin users only
+# Note: Does NOT actually delete from database — data is preserved
+
 import uuid
 from typing import Annotated
 
