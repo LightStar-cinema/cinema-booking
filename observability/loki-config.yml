@@ -1,3 +1,24 @@
+# ============================================================
+# CineLuxe — observability/loki-config.yml
+# DevOps / Deployment: Hikmatov Dilshodbek (U2310091)
+#
+# What is Loki?
+#   Loki is a log storage system by Grafana Labs.
+#   It stores application logs (like a searchable log file).
+#
+# What does this file configure?
+#   - Single-node mode (no clustering needed for university project)
+#   - Storage path for log chunks and indexes
+#   - Retention and ingestion limits
+#
+# Flow:
+#   FastAPI logs → OTLP → otel-collector → Loki → Grafana
+#
+# Container name: cinema_loki
+# Data stored in: loki_data (Docker named volume)
+# Grafana queries Loki using label: {job="cinema-api"}
+# ============================================================
+
 auth_enabled: false
 
 server:
