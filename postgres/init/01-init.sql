@@ -1,2 +1,17 @@
+-- ============================================================
+-- CineLuxe — postgres/init/01-init.sql
+-- DevOps / Deployment: Hikmatov Dilshodbek (U2310091)
+--
+-- What does this file do?
+--   This script runs ONCE when the PostgreSQL container starts
+--   for the first time. It is a seed/initialization hook.
+--
+-- Execution: automatically by Docker entrypoint
+--   /docker-entrypoint-initdb.d/01-init.sql
+--
+-- Container name: cinema_postgres
+-- Data stored in: postgres_data (Docker named volume)
+-- ============================================================
+
 -- Placeholder: schema migrations will go here
 -- Applied automatically when the postgres container first starts
